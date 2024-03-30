@@ -23,6 +23,9 @@
         @endif
 
         <!-- Scripts -->
+        <script>
+            let BASE_URL = {!! json_encode(url('/')) !!} + "/";
+        </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-dblue">

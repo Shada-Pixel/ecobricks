@@ -397,3 +397,10 @@ function changePassword() {
 function cchangePassword() {
     togglePasswordVisibility("#password_confirmation", ".cpasswordShowHide");
 }
+
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});

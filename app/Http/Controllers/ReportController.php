@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use App\Models\Customer;
 use App\Models\Order;
-
+use Carbon\Carbon;
 class ReportController extends Controller
 {
     /**
@@ -30,6 +30,21 @@ class ReportController extends Controller
         return view('reports.due', [
             'customers' => $customers
         ]);
+    }
+
+
+
+    /**
+     * Display the user's profile form.
+     */
+    public function daily(Request $request)
+    {
+
+        return Order::whereDate('order_date', Carbon::today())->get();
+        if ($request->ajax()) {
+        }
+
+        return view('reports.daily');
     }
 
 }
