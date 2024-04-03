@@ -12,6 +12,8 @@ use Illuminate\View\View;
 use App\Models\Customer;
 use App\Models\Order;
 use Carbon\Carbon;
+use DataTables;
+
 class ReportController extends Controller
 {
     /**
@@ -40,11 +42,49 @@ class ReportController extends Controller
     public function daily(Request $request)
     {
 
-        return Order::whereDate('order_date', Carbon::today())->get();
         if ($request->ajax()) {
+            if ($request->today) {
+                $targatedDate = $request->today;
+            }else{
+                $targatedDate = Carbon::today();
+            }
+            $orders =  Order::whereDate('order_date', $targatedDate)->get();
+            return datatables()->of($orders)->make(true);
         }
 
         return view('reports.daily');
+    }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function cash(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $formdtae = $request->weekago;
+            $todate = $request->today;
+            $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->where('due_bill', 0)->get();
+            return datatables()->of($orders)->make(true);
+        }
+
+        return view('reports.cash');
+    }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function daterange(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $formdtae = $request->weekago;
+            $todate = $request->today;
+            $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->get();
+            return datatables()->of($orders)->make(true);
+        }
+
+        return view('reports.daterange');
     }
 
 }

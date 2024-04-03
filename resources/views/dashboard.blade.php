@@ -76,6 +76,21 @@
                                     </x-select-input>
                                 </div>
                             </div>
+                            <div class="flex justify-between gap-6 items-center mt-4">
+                                <!-- Chalan number -->
+                                <div>
+                                    <x-input-label for="chalan_number" :value="__('Chalan Number')" />
+                                    <x-text-input id="chalan_number" class="block mt-1 w-full onlynumber" name="chalan_number" />
+                                    <x-input-error :messages="$errors->get('chalan_number')" class="mt-2" />
+                                </div>
+                                <!-- Note -->
+                                <div class="flex-grow">
+                                    <x-input-label for="note" :value="__('Order note')" />
+                                    <x-text-input id="note" class="block mt-1 w-full" name="note" />
+                                    <x-input-error :messages="$errors->get('note')" class="mt-2" />
+                                </div>
+
+                            </div>
 
                             {{-- Bricks --}}
                             <div class="flex justify-between items-center gap-6 mt-4">

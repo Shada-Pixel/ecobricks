@@ -53,7 +53,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', ['customer'=>$customer]);
     }
 
     /**
@@ -61,7 +61,13 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        // return $request;
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->update();
+        return redirect()->route('customers.index')->with('success', 'Customer has been Updated!');
     }
 
     /**
@@ -69,6 +75,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect()->route('customers.index')->with('success', 'Customer Deleted!');
     }
 }

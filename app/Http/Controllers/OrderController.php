@@ -49,6 +49,8 @@ class OrderController extends Controller
         $order->total_bill = $request->subtotal;
         $order->paid_bill = $request->paid;
         $order->due_bill = $request->due;
+        $order->note = $request->note;
+        $order->chalan_number = $request->chalan_number;
 
         if ($request->due <= 0) {
             $order->payment_type = 1;
@@ -87,7 +89,42 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+
+        if($request->customer_id){
+            $order->customer_id = $request->customer_id;
+        }
+        $order->brick_qty = $request->brick_qty;
+        $order->brick_grade = $request->grade;
+        $order->brick_up = $request->brick_up;
+        $order->brick_total = $request->bricks_total;
+        $order->chips_qty = $request->chip_qty;
+        $order->chips_up = $request->chip_up;
+        $order->chips_total = $request->chips_total;
+        $order->transport = $request->transport;
+        $order->type = $request->order_type;
+        $order->total_bill = $request->subtotal;
+        $order->paid_bill = $request->paid;
+        $order->due_bill = $request->due;
+        if ($request->note) {
+            # code...
+            $order->note = $request->note;
+        }
+        $order->chalan_number = $request->chalan_number;
+
+        if ($request->due <= 0) {
+            $order->payment_type = 1;
+        }else{
+            $order->payment_type = 2;
+        }
+
+        if ($request->due != 0) {
+            $order->status = 1;
+        }
+
+        $order->order_date = $request->orderdate;
+        $order->save();
+
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -95,6 +132,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $roder->delete();
+        return route()->redirect('orders.index');
     }
 }

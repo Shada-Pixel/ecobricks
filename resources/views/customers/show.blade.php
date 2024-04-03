@@ -58,7 +58,7 @@
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Order Date</th>
-                                <th>Tra.</th>
+                                {{-- <th>Tra.</th> --}}
                                 <th>Type</th>
                                 <th>Grade</th>
                                 <th>Order No.</th>
@@ -76,7 +76,7 @@
                             <tr>
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
 
-                                <td>@if ($order->transport == 1)
+                                {{-- <td>@if ($order->transport == 1)
                                     Trolly
                                 @elseif ($order->transport == 2)
                                 Truck
@@ -84,7 +84,7 @@
                                 Alom Shadhu
                                 @else()
                                 Self
-                                @endif</td>
+                                @endif</td> --}}
                                 <td>@if ($order->type == 1) F @else M @endif </td>
                                 <td>@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
                                 <td>{{ $order->order_number }}</td>
@@ -114,7 +114,7 @@
                         <tfoot>
                             <tr>
                                 <td></td>
-                                <td></td>
+                                {{-- <td></td> --}}
                                 <td></td>
                                 <td></td>
                                 <td></td>

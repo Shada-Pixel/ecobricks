@@ -23,10 +23,10 @@
     <section class="max-w-7xl mx-auto flex justify-center items-center min-h-screen relative">
         <div class="">
 
-            <img src="{{ asset('images/eb.png') }}" alt="" srcset="">
+            <img src="{{ asset('images/ebo.png') }}" alt="" srcset="">
             <div class="">
                 @if (Route::has('login'))
-                    <nav class="flex flex-1 justify-end">
+                    <nav class="flex flex-1 justify-center gap-5">
                         @auth
                             <div class="flex justify-center items-center mt-6">
                                 <a href="{{ url('/dashboard') }}" class="inline-flex items-center px-4 py-2 bg-brick border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-lgreen focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">

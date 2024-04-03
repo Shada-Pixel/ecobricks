@@ -22,7 +22,7 @@ export default {
             colors: {
                 'lgreen': '#95C22B',
                 'dblue': '#0B132B',
-                'brick': '#E17648',
+                'brick': '#fb6705',
             },
         },
     },

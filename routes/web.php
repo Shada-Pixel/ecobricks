@@ -25,8 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ReportController::class)->group(function () {
         Route::get('/dailyreport','daily')->name('report.daily');
         Route::get('/duereport','due')->name('report.due');
-        Route::get('/priodreport','priod')->name('report.priod');
-        Route::get('/ledgerreport','ledger')->name('report.ledger');
+        Route::get('/priodreport','daterange')->name('report.priod');
         Route::get('/cashreport','cash')->name('report.cash');
     });
 

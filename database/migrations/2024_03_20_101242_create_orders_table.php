@@ -38,6 +38,8 @@ return new class extends Migration
             $table->integer('total_bill')->default(0);
             $table->integer('paid_bill')->default(0);
             $table->string('due_bill')->default(0);
+            $table->longtext('note')->nullable();
+            $table->integer('chalan_number')->nullable();
             $table->tinyInteger('payment_type')->default(1)->comment('1 => cash, 2 => due');
             $table->tinyInteger('status')->default(2)->comment('1 => pending, 2 => complete');
             $table->date('order_date')->default(DB::raw('CURRENT_DATE'));

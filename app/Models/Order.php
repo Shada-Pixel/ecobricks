@@ -28,5 +28,20 @@ class Order extends Model
         'payment_type',
         'status',
         'order_date',
+        'note',
+        'chalan_number'
     ];
+
+
+
+
+    /**
+     * Get all of the comments for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customer(){
+
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }

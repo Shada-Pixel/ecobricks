@@ -39,8 +39,8 @@
                         {{ $header }}
 
                         <div class="text-left text-sm">
-                            <p>LC: Faysal Alom</p>
-                            <p>UD: 24 Jul 24</p>
+                            <p>LC: {{$lastc}}</p>
+                            <p>UD: {{$ud}}</p>
                         </div>
                     </div>
                 </header>

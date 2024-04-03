@@ -30,8 +30,8 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48" class="mb-4 mr-4">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-5">
+                <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
@@ -49,10 +49,12 @@
                         <x-dropdown-link :href="route('report.daily')">{{ __('Daily') }}</x-dropdown-link>
                         <x-dropdown-link :href="route('report.due')">{{ __('Due') }}</x-dropdown-link>
                         <x-dropdown-link :href="route('report.priod')">{{ __('Priod') }}</x-dropdown-link>
-                        <x-dropdown-link :href="route('report.ledger')">{{ __('Ledger') }}</x-dropdown-link>
                         <x-dropdown-link :href="route('report.cash')">{{ __('Cash') }}</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
+
+                @auth
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -84,6 +86,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                @endauth
             </div>
 
 
@@ -106,6 +109,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        @auth
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -131,5 +135,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>

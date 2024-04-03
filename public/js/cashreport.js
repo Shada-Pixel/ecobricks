@@ -4,6 +4,7 @@ var orderlist = null;
 $(document).ready(function () {
 
     $('.today').val(getToday());
+    $('.weekago').val(weekago());
 
 
     // On filter button click
@@ -13,7 +14,7 @@ $(document).ready(function () {
     });
 
 
-    let urlPath = 'dailyreport';
+    let urlPath = 'cashreport';
     orderlist =  $('#orderTable').DataTable({
         "processing": true,
         "serverSide": true,
@@ -23,28 +24,29 @@ $(document).ready(function () {
             url: BASE_URL+urlPath,
             data: function (d) {
                 d.today = $('.today').val();
+                d.weekago = $('.weekago').val();
             }
         },
         "columns": [
             // {  data : 'DT_RowIndex', name: 'DT_RowIndex'},
             { "data": "order_date" },
-            // {
-            //     data: null,
-            //     render: function (data) {
-            //         let bookInfoUrl = ''
+            {
+                data: null,
+                render: function (data) {
+                    let bookInfoUrl = ''
 
-            //         if (data.transport == 1) {
-            //             bookInfoUrl = `<span >Trolly</span>`;
-            //         } else if (data.transport == 2) {
-            //             bookInfoUrl = `<span >Track</span>`;
-            //         }else if (data.transport == 3) {
-            //             bookInfoUrl = `<span >Alom Shadhu</span>`;
-            //         }else {
-            //             bookInfoUrl = `<span >Self</span>`;
-            //         }
-            //         return bookInfoUrl;
-            //     }
-            // },
+                    if (data.transport == 1) {
+                        bookInfoUrl = `<span >Trolly</span>`;
+                    } else if (data.transport == 2) {
+                        bookInfoUrl = `<span >Track</span>`;
+                    }else if (data.transport == 3) {
+                        bookInfoUrl = `<span >Alom Shadhu</span>`;
+                    }else {
+                        bookInfoUrl = `<span >Self</span>`;
+                    }
+                    return bookInfoUrl;
+                }
+            },
             { "data": "type" },
             { "data": "brick_grade" },
             { "data": "order_number" },
@@ -69,3 +71,13 @@ function getToday() {
     local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
 }
+
+function weekago() {
+    var currentDate = new Date();
+    var sevenDaysEarlier = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));
+    var formattedDate = sevenDaysEarlier.toISOString().split('T')[0];
+    return formattedDate;
+}
+
+
+

@@ -1,115 +1,44 @@
-        <!-- begin: Right Detail Employee -->
-        <div class="col-lg-8 card-profile">
-            <div class="card card-block card-stretch mb-0">
-                <div class="card-header px-3">
-                    <div class="header-title">
-                        <h4 class="card-title">Customer Information</h4>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ $customer->name }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <form action="{{ route('customers.update', $customer) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    @method('PATCH')
+                    <div class="mt-4">
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $customer->name }}" required />
                     </div>
-                </div>
-                <div class="card-body p-3">
-                    <ul class="list-inline p-0 mb-0">
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Name</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->name }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Email</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->email }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Phone</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->phone }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Shop Name</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->shopname }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Account Holder</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->account_holder }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Bank Name</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->bank_name }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Account Number</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->account_number }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Bank Branch</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->bank_branch }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">City</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <input type="text" class="form-control bg-white" value="{{ $customer->city }}" readonly>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-12">
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-4">
-                                    <label class="col-form-label">Address</label>
-                                </div>
-                                <div class="col-sm-9 col-8">
-                                    <textarea class="form-control bg-white" readonly>{{ $customer->address }}</textarea>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="mt-4">
+                        <x-input-label for="phone" :value="__('Phone Number')" />
+                        <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" value="{{ $customer->phone }}" required />
+                    </div>
+                    <div class="mt-4">
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" value="{{ $customer->email }}" name="email" />
+                    </div>
+                    <div class="mt-4">
+                        <x-input-label for="address" :value="__('Address')" />
+                        <x-text-input id="address" class="block mt-1 w-full" type="text" value="{{ $customer->address }}" name="address" />
+                    </div>
+
+                    <!-- Submiting Data -->
+                    <div class="my-4">
+                        <x-primary-button>Update Information</x-primary-button>
+                        <a class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                            href="{{ route('customers.index') }}">Cancel</a>
+                    </div>
+                </form>
             </div>
         </div>
-        <!-- end: Right Detail Employee -->
+    </div>
+
+
+</x-app-layout>
