@@ -21,16 +21,31 @@ class ReportController extends Controller
      */
     public function due(Request $request)
     {
-        $customers = Customer::whereHas('orders', function (Builder $query) {
-            $query->where('due_bill', '>', 0);
-        })->where(function (Builder $query) {
-            $query->whereHas('orders', function (Builder $subquery) {
-                $subquery->where('due_bill', '>', 0);
-            });
-        })->get();
+        $customers = Customer::all();
+        $filteredCustomers = $customers->filter(function ($customer) {
+            return $customer->duebill() != 0;
+        });
+
+        $pay = 0;
+        $ric = 0;
+
+        foreach ($customers as $customer) {
+            if ($customer->duebill() > 0) {
+                $ric += $customer->duebill();
+            }
+        }
+        foreach ($customers as $customer) {
+            if ($customer->duebill() < 0) {
+                $pay -= $customer->duebill();
+            }
+        }
+
+
 
         return view('reports.due', [
-            'customers' => $customers
+            'customers' => $filteredCustomers,
+            'pay' => $pay,
+            'ric' => $ric,
         ]);
     }
 

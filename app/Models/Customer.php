@@ -48,6 +48,7 @@ class Customer extends Model
     {
         return $this->orders()->sum('due_bill');
     }
+    
     public function bricks()
     {
         return $this->orders()->sum('brick_qty');

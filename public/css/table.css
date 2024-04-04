@@ -1,0 +1,29 @@
+
+/* Print media */
+@media print {
+
+
+    .table {
+        margin-top: 30px !important;
+    }
+    
+    .table td {
+        padding: none !important;
+        border: 1px solid #110A57 !important;
+    }
+
+    .table .ligth th {
+        padding: 5px !important;
+        border: 1px solid #110A57 !important;
+        text-transform: capitalize;
+        font-size: 14px;
+        line-height: 22px;
+        background: #f4f5fa;
+        color: #110A57;
+    }
+}
+
+
+
+
+

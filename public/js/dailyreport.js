@@ -4,47 +4,47 @@ var orderlist = null;
 $(document).ready(function () {
 
     $('.today').val(getToday());
+    $('#datereport').html(getToday());
 
 
     // On filter button click
     $('#dailyFilterBtn').click(function (e) {
         e.preventDefault();
+        $('#datereport').html($('.today').val());
         orderlist.draw();
     });
+
+
+    $('#printbtn').click(function (e) {
+        printNow();
+    });
+
+
 
 
     let urlPath = 'dailyreport';
     orderlist =  $('#orderTable').DataTable({
         "processing": true,
         "serverSide": true,
-        "searching":false,
-        paging:false,
+        searching: false,
+        paging: false,
+        ordering:  false,
+        info: false,
+        // navigation: false,
         ajax: {
             url: BASE_URL+urlPath,
+            BeforeSend: function(){
+                $('#datereport').text($('.today').val);
+              },
             data: function (d) {
                 d.today = $('.today').val();
-            }
+            },
+
         },
         "columns": [
-            // {  data : 'DT_RowIndex', name: 'DT_RowIndex'},
             { "data": "order_date" },
-            // {
-            //     data: null,
-            //     render: function (data) {
-            //         let bookInfoUrl = ''
-
-            //         if (data.transport == 1) {
-            //             bookInfoUrl = `<span >Trolly</span>`;
-            //         } else if (data.transport == 2) {
-            //             bookInfoUrl = `<span >Track</span>`;
-            //         }else if (data.transport == 3) {
-            //             bookInfoUrl = `<span >Alom Shadhu</span>`;
-            //         }else {
-            //             bookInfoUrl = `<span >Self</span>`;
-            //         }
-            //         return bookInfoUrl;
-            //     }
-            // },
+            { "data": "note" },
+            { "data": "chalan_number" },
             { "data": "type" },
             { "data": "brick_grade" },
             { "data": "order_number" },
@@ -68,4 +68,14 @@ function getToday() {
     const local = new Date();
     local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
+}
+
+
+function printNow() {
+    // window.print();
+    var printContent = $('.printable').html();
+    var originalContent = $('body').html();
+    $('body').html(printContent);
+    window.print();
+    $('body').html(originalContent);
 }

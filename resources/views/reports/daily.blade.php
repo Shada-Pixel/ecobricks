@@ -14,7 +14,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl print:min-w-full mx-auto print:mx-0 sm:px-6 lg:px-8">
+        <div class="max-w-7xl print:w-full mx-auto print:mx-0 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm print:shadow-none sm:rounded-lg">
                 <div class="px-6 pt-6 flex justify-between items-center print:hidden">
                     <div class="">
@@ -23,17 +23,26 @@
                             <x-primary-button id="dailyFilterBtn">Filter</x-primary-button>
                         </form>
                     </div>
-                    <x-primary-button onclick="window.print();return false">Print</x-primary-button>
+                    <x-primary-button id="printbtn">Print</x-primary-button>
                 </div>
-                <div class="p-6 print:p-0 text-gray-900">
-                    <div class="p-6 print:flex justify-center items-center hidden ">
-                        <h2 class="text-xl font-bold">{{ __('Daily Report') }}</h2>
+                <div class="p-6 print:p-0 text-gray-900 printable print:min-w-full" >
+
+                    <div class="p-6 print:p-0 print:flex justify-between items-center hidden">
+                        <div class="flex justify-start gap-5 items-center">
+                            <img src="{{asset('images/ebo.png')}}" alt="" srcset="" class="w-24">
+                            <h2 class="text-3xl font-bold uppercase">{{ __('Daily Report') }}</h2>
+                        </div>
+                        <div class="flex items-center">
+                            <p>Date: <span id="datereport"></span></p>
+                        </div>
                     </div>
-                    <table class="table mb-0" id="orderTable">
+
+                    <table class="table mb-0 text-sm" id="orderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
-                                <th>Order Date</th>
-                                {{-- <th>Transport</th> --}}
+                                <th>Date</th>
+                                <th>Note</th>
+                                <th>Chalan</th>
                                 <th>Type</th>
                                 <th>Grade</th>
                                 <th>Order No.</th>

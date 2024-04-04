@@ -12,8 +12,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}"/>
-        <link rel="stylesheet" href="{{ asset('assets/css/backend-plugin.min.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('assets/css/backend-plugin.min.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('assets/css/backend.css?v=1.0.0') }}">
+        <link rel="stylesheet" href="{{ asset('css/table.css') }}">
 
         <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
