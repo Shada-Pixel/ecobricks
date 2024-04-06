@@ -25,14 +25,17 @@ class AppServiceProvider extends ServiceProvider
         if ($order && $order->customer) {
             $latic = $order->customer->name;
             $ud = date('d-M-y', strtotime($order->updated_at));
+            $cn = Order::whereNotNull('chalan_number')->latest()->value('chalan_number');
         }else{
             $latic = 'N/A';
             $ud = 'N/A';
+            $cn = 'N/A';
         }
 
         {{  }}
         // Share variable with all views
         View::share('lastc',$latic);
         View::share('ud',$ud);
+        View::share('cn',$cn);
     }
 }

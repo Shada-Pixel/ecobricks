@@ -14,12 +14,22 @@ $(document).ready(function () {
     });
 
 
+
+    $('#printbtn').click(function (e) {
+        $('#dateform').html($('.weekago').val());
+        $('#dateto').html($('.today').val());
+        printNow();
+    });
+
+
+
     let urlPath = 'cashreport';
     orderlist =  $('#orderTable').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "searching":false,
-        paging:false,
+        // "processing": true,
+        // "serverSide": true,
+        searching: false,
+        paging: false,
+        info: false,
         ajax: {
             url: BASE_URL+urlPath,
             data: function (d) {
@@ -78,6 +88,17 @@ function weekago() {
     var formattedDate = sevenDaysEarlier.toISOString().split('T')[0];
     return formattedDate;
 }
+
+
+function printNow() {
+    // window.print();
+    var printContent = $('.printable').html();
+    var originalContent = $('body').html();
+    $('body').html(printContent);
+    window.print();
+    $('body').html(originalContent);
+}
+
 
 
 

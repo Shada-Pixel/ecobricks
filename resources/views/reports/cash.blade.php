@@ -25,11 +25,18 @@
                             <x-primary-button id="dailyFilterBtn">Filter</x-primary-button>
                         </form>
                     </div>
-                    <x-primary-button onclick="window.print();return false">Print</x-primary-button>
+                    <x-primary-button id="printbtn">Print</x-primary-button>
                 </div>
-                <div class="p-6 text-gray-900">
-                    <div class="p-6 print:flex justify-center items-center hidden ">
-                        <h2 class="text-xl font-bold">{{ __('Due Customers') }}</h2>
+                <div class="p-6 print:p-0 text-gray-900 printable print:min-w-full">
+                    {{-- printable head --}}
+                    <div class="p-6 print:p-0 print:flex justify-between items-center hidden">
+                        <div class="flex justify-start gap-5 items-center">
+                            <img src="{{asset('images/ebo.png')}}" alt="" srcset="" class="w-24">
+                            <h2 class="text-3xl font-bold uppercase">{{ __('Cash Report') }}</h2>
+                        </div>
+                        <div class="flex items-center">
+                            <p>Date: <span id="dateform"></span> to <span id="dateto"></span></p>
+                        </div>
                     </div>
                     <table class="table mb-0" id="orderTable">
                         <thead class="bg-white text-uppercase">

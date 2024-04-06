@@ -29,7 +29,7 @@
         </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-dblue">
+    <body class="font-sans antialiased text-dblue relative">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -38,17 +38,30 @@
                 <header class="bg-white shadow print:hidden">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                         {{ $header }}
+                        @if(session('success'))
+                        <div class="bg-green-500/40 text-dblue px-10 py-1 rounded-md feedbackmessage">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if(session('error'))
+                        <div class="bg-red-500/40 text-dblue px-10 py-1 rounded-md feedbackmessage">
+                            {{ session('error') }}
+                        </div>
+                        @endif
 
                         <div class="text-left text-sm">
                             <p>LC: {{$lastc}}</p>
                             <p>UD: {{$ud}}</p>
+                            <p>CN: {{$cn}}</p>
                         </div>
                     </div>
                 </header>
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="">
+
                 {{ $slot }}
             </main>
         </div>

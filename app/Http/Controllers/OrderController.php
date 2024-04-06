@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Customer;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -65,7 +66,7 @@ class OrderController extends Controller
         $order->order_date = $request->orderdate;
         $order->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Record added successfully!');
     }
 
     /**
@@ -81,7 +82,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $customers = Customer::all();
+        return view('orders.edit',['customers'=> $customers, 'order' => $order]);
     }
 
     /**
@@ -122,9 +124,9 @@ class OrderController extends Controller
         }
 
         $order->order_date = $request->orderdate;
-        $order->save();
+        $order->update();
 
-        return redirect()->route('orders.index');
+        return redirect()->route('orders.index')->with('success', 'Information updated!');
     }
 
     /**
@@ -132,7 +134,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $roder->delete();
-        return route()->redirect('orders.index');
+        $order->delete();
+        return redirect()->route('orders.index')->with('success', 'Record Deleted!');
     }
 }

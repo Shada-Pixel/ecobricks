@@ -10,12 +10,12 @@ $(document).ready(function () {
     // On filter button click
     $('#dailyFilterBtn').click(function (e) {
         e.preventDefault();
-        $('#datereport').html($('.today').val());
         orderlist.draw();
     });
 
-
+    
     $('#printbtn').click(function (e) {
+        $('#datereport').html($('.today').val());
         printNow();
     });
 

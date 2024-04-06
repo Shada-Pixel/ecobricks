@@ -17,6 +17,11 @@ $(document).ready(function () {
         }
     });
 
+    $('.feedbackmessage').delay(3000).fadeOut();
+    $('.feedbackmessage').click(function () {
+        $(this).fadeOut();
+    });
+
     $("#flashpop").fadeOut(3000);
 
     // Function to handle the scroll event

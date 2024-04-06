@@ -10,16 +10,29 @@ $(document).ready(function () {
     // On filter button click
     $('#dailyFilterBtn').click(function (e) {
         e.preventDefault();
+
+
         orderlist.draw();
     });
 
 
+
+
+    $('#printbtn').click(function (e) {
+        $('#dateform').html($('.weekago').val());
+        $('#dateto').html($('.today').val());
+        printNow();
+    });
+
+
+
     let urlPath = 'priodreport';
     orderlist =  $('#orderTable').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "searching":false,
-        paging:false,
+        processing: true,
+        serverSide: true,
+        searching: false,
+        paging: false,
+        info: false,
         ajax: {
             url: BASE_URL+urlPath,
             data: function (d) {
@@ -81,3 +94,11 @@ function weekago() {
 
 
 
+function printNow() {
+    // window.print();
+    var printContent = $('.printable').html();
+    var originalContent = $('body').html();
+    $('body').html(printContent);
+    window.print();
+    $('body').html(originalContent);
+}

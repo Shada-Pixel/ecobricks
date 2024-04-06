@@ -75,7 +75,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer->delete();
-        return redirect()->route('customers.index')->with('success', 'Customer Deleted!');
+        if ( $customer->duebill() == 0) {
+            # code...
+            $customer->orders()->update(['customer_id' => null]);
+            $customer->delete();
+            return redirect()->route('customers.index')->with('success', 'Customer Deleted!');
+        }
+
+        return redirect()->route('customers.index')->with('error', 'Customer Have Due!');
     }
 }
