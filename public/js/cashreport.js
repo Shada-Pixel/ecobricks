@@ -40,6 +40,7 @@ $(document).ready(function () {
         "columns": [
             // {  data : 'DT_RowIndex', name: 'DT_RowIndex'},
             { "data": "order_date" },
+            { "data": "note" },
             {
                 data: null,
                 render: function (data) {
@@ -59,7 +60,7 @@ $(document).ready(function () {
             },
             { "data": "type" },
             { "data": "brick_grade" },
-            { "data": "order_number" },
+
             { "data": "brick_qty" },
             { "data": "chips_qty" },
             { "data": "brick_up" },

@@ -13,7 +13,7 @@ $(document).ready(function () {
         orderlist.draw();
     });
 
-    
+
     $('#printbtn').click(function (e) {
         $('#datereport').html($('.today').val());
         printNow();
@@ -43,11 +43,25 @@ $(document).ready(function () {
         },
         "columns": [
             { "data": "order_date" },
+            {
+                data: null,
+                render: function (data) {
+
+                    let customer = 'Cash sell';
+
+                    if (data.customer) {
+                        customer = `<a href="${BASE_URL+'customers/'+data.customer_id}">${data.customer.name}</>`;
+                    }
+
+                    return customer;
+                }
+            },
             { "data": "note" },
             { "data": "chalan_number" },
             { "data": "type" },
             { "data": "brick_grade" },
-            { "data": "order_number" },
+
+
             { "data": "brick_qty" },
             { "data": "chips_qty" },
             { "data": "brick_up" },

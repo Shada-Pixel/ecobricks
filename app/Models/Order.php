@@ -33,6 +33,9 @@ class Order extends Model
     ];
 
 
+    protected $with=['customer'];
+
+
 
 
     /**

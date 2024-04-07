@@ -46,23 +46,20 @@ $(document).ready(function () {
             {
                 data: null,
                 render: function (data) {
-                    let bookInfoUrl = ''
 
-                    if (data.transport == 1) {
-                        bookInfoUrl = `<span >Trolly</span>`;
-                    } else if (data.transport == 2) {
-                        bookInfoUrl = `<span >Track</span>`;
-                    }else if (data.transport == 3) {
-                        bookInfoUrl = `<span >Alom Shadhu</span>`;
-                    }else {
-                        bookInfoUrl = `<span >Self</span>`;
+                    let customer = 'Cash sell';
+
+                    if (data.customer) {
+                        customer = `<a href="${BASE_URL+'customers/'+data.customer_id}">${data.customer.name}</>`;
                     }
-                    return bookInfoUrl;
+
+                    return customer;
                 }
             },
+            { "data": "note" },
+            { "data": "chalan_number" },
             { "data": "type" },
             { "data": "brick_grade" },
-            { "data": "order_number" },
             { "data": "brick_qty" },
             { "data": "chips_qty" },
             { "data": "brick_up" },

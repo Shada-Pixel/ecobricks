@@ -98,10 +98,10 @@
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Order Date</th>
-                                {{-- <th>Tra.</th> --}}
+                                <th>Challan</th>
+                                <th>Order No.</th>
                                 <th>Type</th>
                                 <th>Grade</th>
-                                <th>Order No.</th>
                                 <th>Bricks</th>
                                 <th>Chips</th>
                                 <th>Rate</th>
@@ -115,6 +115,8 @@
                             @foreach ($customer->orders as $order)
                             <tr>
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
+                                <td>{{ $order->chalan_number }}</td>
+                                <td>{{ $order->order_number }}</td>
 
                                 {{-- <td>@if ($order->transport == 1)
                                     Trolly
@@ -127,7 +129,6 @@
                                 @endif</td> --}}
                                 <td>@if ($order->type == 1) F @else M @endif </td>
                                 <td>@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
-                                <td>{{ $order->order_number }}</td>
                                 <td>{{ $order->brick_qty }}</td>
                                 <td>{{ $order->chips_qty }}</td>
                                 <td>{{ $order->brick_up }}</td>

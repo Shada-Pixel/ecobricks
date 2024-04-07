@@ -41,11 +41,11 @@
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Date</th>
+                                <th>Customer</th>
                                 <th>Note</th>
                                 <th>Chalan</th>
                                 <th>Type</th>
                                 <th>Grade</th>
-                                <th>Order No.</th>
                                 <th>Bricks</th>
                                 <th>Chips</th>
                                 <th>Rate</th>

@@ -7,7 +7,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Range Report') }}
+            {{ __('Priodic Report') }}
             <a href="{{ route('customers.create') }}" class="ml-4"><x-primary-button>New Customer
                     Ledger</x-primary-button></a>
         </h2>
@@ -32,7 +32,7 @@
                     <div class="p-6 print:p-0 print:flex justify-between items-center hidden">
                         <div class="flex justify-start gap-5 items-center">
                             <img src="{{asset('images/ebo.png')}}" alt="" srcset="" class="w-24">
-                            <h2 class="text-3xl font-bold uppercase">{{ __('Report') }}</h2>
+                            <h2 class="text-3xl font-bold uppercase">{{ __('Priodic Report') }}</h2>
                         </div>
                         <div class="flex items-center">
                             <p>Date: <span id="dateform"></span> to <span id="dateto"></span></p>
@@ -42,10 +42,11 @@
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Order Date</th>
-                                <th>Transport</th>
+                                <th>Customer</th>
+                                <th>Note</th>
+                                <th>Challan</th>
                                 <th>Type</th>
                                 <th>Grade</th>
-                                <th>Order Number.</th>
                                 <th>Bricks</th>
                                 <th>Chips</th>
                                 <th>Rate</th>

@@ -42,10 +42,10 @@
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Order Date</th>
+                                <th>Customer Name</th>
                                 <th>Transport</th>
                                 <th>Type</th>
                                 <th>Grade</th>
-                                <th>Order Number.</th>
                                 <th>Bricks</th>
                                 <th>Chips</th>
                                 <th>Rate</th>
