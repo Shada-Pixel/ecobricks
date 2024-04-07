@@ -178,7 +178,7 @@
             $(document).ready(function() {
                 // This is the table of all customers
                 $('#customerTable').dataTable({
-                    paging: false
+                    paging: true,
                 });
 
 
