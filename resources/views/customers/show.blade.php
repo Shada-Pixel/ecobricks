@@ -5,11 +5,17 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.min.css" />
     </x-slot>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $customer->name }}
-            <a href="{{route('customers.edit',$customer->id)}}" class="ml-4"><x-primary-button>Edit</x-primary-button></a>
-            <a href="{{route('customers.index')}}" class="ml-4"><x-secondary-button>Back</x-secondary-button></a>
-        </h2>
+
+
+        <div class="">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ $customer->name }}
+            </h2>
+            <div class="flex gap-4 mt-2">
+                <a href="{{route('customers.edit',$customer->id)}}" class=""><x-primary-button>Edit</x-primary-button></a>
+                <a href="{{route('customers.index')}}" class=""><x-secondary-button>Back</x-secondary-button></a>
+            </div>
+        </div>
     </x-slot>
 
     {{-- Customers orders --}}

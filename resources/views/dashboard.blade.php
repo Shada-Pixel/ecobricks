@@ -12,7 +12,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-12 gap-6">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-4">
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-4 hidden sm:block">
                 <div class="p-6">
                     <h2 class="font-semibold text-xl text-dblue leading-tight">Customers</h2>
 
@@ -34,14 +35,15 @@
                     </table>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-8">
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-12 sm:col-span-8">
 
                 <div class="p-6 text-gray-900">
                     <h2 class="font-semibold text-xl text-dblue leading-tight">New Order</h2>
                     <div class="">
                         <form method="POST" action="{{ route('orders.store') }}" id="orderForm">
                             @csrf
-                            <div class="flex justify-between gap-6 items-center">
+                            <div class="flex justify-between gap-6 items-center flex-wrap">
                                 <!-- Date -->
                                 <div class="mt-4">
                                     <x-input-label for="orderdate" :value="__('Date')" />
@@ -76,6 +78,7 @@
                                     </x-select-input>
                                 </div>
                             </div>
+
                             <div class="flex justify-between gap-6 items-center mt-4">
                                 <!-- Chalan number -->
                                 <div>
@@ -145,13 +148,13 @@
                             <hr class="mt-4">
                             <div class="">
                                 <div class="mt-4 flex justify-end items-center">
-                                    <p>Subtotal:  </p><x-text-input id="subtotal" class="block ml-4" type="number" name="subtotal" value='0'/>
+                                    <p>Subtotal:  </p><x-text-input id="subtotal" class="block ml-4" type="number" name="subtotal" value='0' readonly/>
                                 </div>
                                 <div class="mt-2 flex justify-end items-center">
-                                    <p>Paid:  </p><x-text-input id="order_paid" class="block ml-4" type="number" name="paid" value='0'/>
+                                    <p>Paid:  </p><x-text-input id="order_paid" class="block ml-4" type="number" name="paid" value='0' />
                                 </div>
                                 <div class="mt-2 flex justify-end items-center">
-                                    <p>Due:  </p><x-text-input id="order_due" class="block ml-4" type="number" name="due" value='0'/>
+                                    <p>Due:  </p><x-text-input id="order_due" class="block ml-4" type="number" name="due" value='0' readonly/>
                                 </div>
                             </div>
 

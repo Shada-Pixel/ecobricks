@@ -6,10 +6,12 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Due Customers') }}
-            <a href="{{route('customers.create')}}" class="ml-4"><x-primary-button>New Customer Ledger</x-primary-button></a>
-        </h2>
+        <div class="">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Due Report') }}
+            </h2>
+            <a href="{{route('customers.create')}}" class="mt-2"><x-primary-button>New Ledger</x-primary-button></a>
+        </div>
     </x-slot>
 
     <div class="py-12">

@@ -6,26 +6,27 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cash Report') }}
-            <a href="{{ route('customers.create') }}" class="ml-4"><x-primary-button>New Customer
-                    Ledger</x-primary-button></a>
-        </h2>
+        <div class="">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Cash Report') }}
+            </h2>
+            <a href="{{route('customers.create')}}" class=" mt-2"><x-primary-button>New Ledger</x-primary-button></a>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-x-scroll">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="px-6 pt-6 flex justify-between items-center print:hidden">
+                <div class="px-6 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center print:hidden gap-y-2 sm:gap-y-0">
                     <div class="">
-                        <form action="" method="post">
+                        <form action="" method="post" class="flex gap-1 sm:gap-0 flex-wrap sm:flex-nowrap sm:gap-x-2 items-center">
                             <x-text-input type="date" class="weekago" ></x-text-input>
                             <span>To</span>
                             <x-text-input type="date" class="today" ></x-text-input>
                             <x-primary-button id="dailyFilterBtn">Filter</x-primary-button>
                         </form>
                     </div>
-                    <x-primary-button id="printbtn">Print</x-primary-button>
+                    <x-primary-button id="printbtn" class="">Print</x-primary-button>
                 </div>
                 <div class="p-6 print:p-0 text-gray-900 printable print:min-w-full">
                     {{-- printable head --}}

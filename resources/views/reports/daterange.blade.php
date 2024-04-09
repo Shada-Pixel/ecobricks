@@ -6,19 +6,20 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Priodic Report') }}
-            <a href="{{ route('customers.create') }}" class="ml-4"><x-primary-button>New Customer
-                    Ledger</x-primary-button></a>
-        </h2>
+        <div class="">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Priodic Report') }}
+            </h2>
+            <a href="{{route('customers.create')}}" class="mt-2"><x-primary-button>New Ledger</x-primary-button></a>
+        </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="px-6 pt-6 flex justify-between items-center print:hidden">
+                <div class="px-6 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center print:hidden gap-y-2 sm:gap-y-0">
                     <div class="">
-                        <form action="" method="post">
+                        <form action="" method="post" class="flex gap-1 sm:gap-0 flex-wrap sm:flex-nowrap">
                             <x-text-input type="date" class="weekago" ></x-text-input>
                             <span>To</span>
                             <x-text-input type="date" class="today" ></x-text-input>
