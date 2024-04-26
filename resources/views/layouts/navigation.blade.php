@@ -46,10 +46,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('report.daily')">{{ __('Daily') }}</x-dropdown-link>
-                        <x-dropdown-link :href="route('report.due')">{{ __('Due') }}</x-dropdown-link>
-                        <x-dropdown-link :href="route('report.priod')">{{ __('Priod') }}</x-dropdown-link>
-                        <x-dropdown-link :href="route('report.cash')">{{ __('Cash') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('report.daily')">{{ __('Daily Sales Report') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('report.due')">{{ __('Due Sales Report') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('report.priod')">{{ __('Priodic Sales Report') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('report.cash')">{{ __('Cash Sales Report') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('report.lsakes')">{{ __('Ledger Sales Report') }}</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
 
@@ -132,7 +133,8 @@
                     <x-responsive-nav-link :href="route('report.daily')">{{ __('Daily Report') }}</x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('report.due')">{{ __('Due Report') }}</x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('report.priod')">{{ __('Priod Report') }}</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('report.cash')">{{ __('Cash Report') }}</x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('report.cash')">{{ __('Cash Sales Report') }}</x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('report.lsakes')">{{ __('Ledger Sales Report') }}</x-responsive-nav-link>
                 </div>
 
                 <x-responsive-nav-link :href="route('profile.edit')">

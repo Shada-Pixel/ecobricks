@@ -13,7 +13,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('name')->get();
+        // return $customers;
         return view('customers.index',['customers'=> $customers]);
     }
 
@@ -30,13 +31,24 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
+
+        $customer = new Customer;
+
+        $customer->name = $request->name;
+        if ($request->email) {
+            $customer->email = $request->email;
+        }
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->save();
+
         // return $request;
-        Customer::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-        ]);
+        // Customer::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'phone' => $request->phone,
+        //     'address' => $request->address,
+        // ]);
         return redirect()->route('customers.index')->with('success', 'Customer has been created!');
     }
 
@@ -63,7 +75,9 @@ class CustomerController extends Controller
     {
         // return $request;
         $customer->name = $request->name;
-        $customer->email = $request->email;
+        if ($request->email) {
+            $customer->email = $request->email;
+        }
         $customer->phone = $request->phone;
         $customer->address = $request->address;
         $customer->update();

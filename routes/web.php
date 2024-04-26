@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class , 'dashboard'])->name('dashboard');
+    Route::get('/home', [HomeController::class , 'home'])->name('home');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/duereport','due')->name('report.due');
         Route::get('/priodreport','daterange')->name('report.priod');
         Route::get('/cashreport','cash')->name('report.cash');
+        Route::get('/ledgersales','lsakes')->name('report.lsakes');
     });
 
     Route::resource('customers', CustomerController::class);

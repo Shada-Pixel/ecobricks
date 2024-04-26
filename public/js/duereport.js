@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('#datereport').html($('.today').val());
     $('#printbtn').click(function (e) {
+        $('#datereport').html($('.today').val());
         printNow();
     });
 });

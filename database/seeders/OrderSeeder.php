@@ -22,10 +22,10 @@ class OrderSeeder extends Seeder
              $randomCustomer = rand(1, 50);
              $randomCustomerWithNull = (rand(0, 5) == 1) ? $randomCustomer : null;
              $bq = rand(1000, 10000);
-             $bup = rand(8,10);
+             $bup = 9.5;
              $bt= $bq * $bup;
              $cq = rand(0,150);
-             $cup = 150;
+             $cup = 100;
              $ct = $cq * $cup;
 
              $tb = $bt + $ct;
@@ -40,10 +40,11 @@ class OrderSeeder extends Seeder
              DB::table('orders')->insert([
                  'customer_id' => $randomCustomerWithNull, // Assuming you have 50 customers seeded
                  'brick_qty' => $bq,
-                 'brick_grade' => rand(1, 2),
+                 'brick_grade' => rand(1, 3),
                  'brick_up' => $bup,
                  'brick_total' => $bt,
                  'chips_qty' => $cq,
+                 'chips_grade' => rand(1,4),
                  'chips_up' => $cup,
                  'chips_total' => $ct,
                  'order_number' => time()+$i,

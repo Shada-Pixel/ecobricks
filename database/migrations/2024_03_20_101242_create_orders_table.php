@@ -22,13 +22,14 @@ return new class extends Migration
 
             // Brick
             $table->integer('brick_qty')->default(0);
-            $table->tinyInteger('brick_grade')->default(1)->comment('1 => 1, 2 => 1.5');
-            $table->integer('brick_up')->default(0);
+            $table->tinyInteger('brick_grade')->default(1)->comment('1 => 1, 2 => 1.5, 3 => others');
+            $table->decimal('brick_up', 8, 2)->default(0);
             $table->integer('brick_total')->default(0);
 
             // Chips
+            $table->tinyInteger('chips_grade')->default(1)->comment('1 => 3/4, 2 => Macadam, 3 => Bats, 4 => Chips');
             $table->integer('chips_qty')->default(0);
-            $table->integer('chips_up')->default(0);
+            $table->decimal('chips_up', 8, 2)->default(0);
             $table->integer('chips_total')->default(0);
 
             // Order

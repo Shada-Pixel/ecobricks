@@ -15,5 +15,11 @@ class HomeController extends Controller
         $customers = Customer::all();
         return view('dashboard',['customers'=> $customers]);
     }
+    /* Return to the dashboad pos entry */
+
+    public function home()
+    {
+        return view('home');
+    }
 
 }

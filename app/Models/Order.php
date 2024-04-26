@@ -17,6 +17,7 @@ class Order extends Model
         'brick_up',
         'brick_total',
         'chips_qty',
+        'chips_grade',
         'chips_up',
         'chips_total',
         'order_number',

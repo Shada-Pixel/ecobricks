@@ -22,6 +22,7 @@ class ReportController extends Controller
     public function due(Request $request)
     {
         $customers = Customer::all();
+        $targatedDate = Carbon::today();
         $filteredCustomers = $customers->filter(function ($customer) {
             return $customer->duebill() != 0;
         });
@@ -46,6 +47,7 @@ class ReportController extends Controller
             'customers' => $filteredCustomers,
             'pay' => $pay,
             'ric' => $ric,
+            'targatedDate'=>$targatedDate,
         ]);
     }
 
@@ -57,17 +59,18 @@ class ReportController extends Controller
     public function daily(Request $request)
     {
 
+        if ($request->today) {
+            $targatedDate = $request->today;
+        }else{
+            $targatedDate = Carbon::today();
+        }
+        $orders =  Order::whereDate('order_date', $targatedDate)->get();
+
         if ($request->ajax()) {
-            if ($request->today) {
-                $targatedDate = $request->today;
-            }else{
-                $targatedDate = Carbon::today();
-            }
-            $orders =  Order::whereDate('order_date', $targatedDate)->get();
             return datatables()->of($orders)->make(true);
         }
 
-        return view('reports.daily');
+        return view('reports.daily',['orders'=>$orders,'targatedDate' => $targatedDate]);
     }
 
     /**
@@ -75,15 +78,36 @@ class ReportController extends Controller
      */
     public function cash(Request $request)
     {
-
-        if ($request->ajax()) {
+        $formdtae = Carbon::now()->subWeek();
+        $todate = Carbon::today();
+        if ($request->weekago) {
             $formdtae = $request->weekago;
+        }
+        if ($request->today) {
             $todate = $request->today;
-            $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->where('due_bill', 0)->get();
-            return datatables()->of($orders)->make(true);
         }
 
-        return view('reports.cash');
+        $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->where('due_bill', 0)->get();
+        return view('reports.cash',['orders'=> $orders, 'formdtae'=>$formdtae, 'todate'=>$todate]);
+    }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function lsakes(Request $request)
+    {
+
+        $formdtae = Carbon::now()->subWeek();
+        $todate = Carbon::today();
+        if ($request->weekago) {
+            $formdtae = $request->weekago;
+        }
+        if ($request->today) {
+            $todate = $request->today;
+        }
+        $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->where('customer_id','!=', NULL)->get();
+
+        return view('reports.ls',['orders'=> $orders, 'formdtae'=>$formdtae, 'todate'=>$todate]);
     }
 
     /**
@@ -91,15 +115,17 @@ class ReportController extends Controller
      */
     public function daterange(Request $request)
     {
-
-        if ($request->ajax()) {
+        $formdtae = Carbon::now()->subWeek();
+        $todate = Carbon::today();
+        if ($request->weekago) {
             $formdtae = $request->weekago;
+        }
+        if ($request->today) {
             $todate = $request->today;
-            $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->get();
-            return datatables()->of($orders)->make(true);
         }
 
-        return view('reports.daterange');
+        $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->get();
+        return view('reports.daterange',['orders'=> $orders, 'formdtae'=>$formdtae, 'todate'=>$todate]);
     }
 
 }

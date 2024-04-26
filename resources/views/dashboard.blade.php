@@ -105,17 +105,18 @@
                                 </div>
                                 <!-- Grade -->
                                 <div>
-                                    <x-input-label for="name" :value="__('Grade')" />
+                                    <x-input-label for="name" :value="__('Bricks Grade')" />
                                     <x-select-input id="grade" name="grade" required>
                                         <option value="1">1</option>
                                         <option value="2">1.5</option>
+                                        <option value="3">Others</option>
                                     </x-select-input>
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
                                 <!-- Unit Price -->
                                 <div>
                                     <x-input-label for="brick_up" :value="__('Unit Price')" />
-                                    <x-text-input id="brick_up" class="block mt-1 w-full" type="number" name="brick_up" :value="old('brick_up')" required value="8"/>
+                                    <x-text-input id="brick_up" class="block mt-1 w-full" type="number" name="brick_up" required value="9.5"/>
                                     <x-input-error :messages="$errors->get('brick_up')" class="mt-2" />
                                 </div>
                                 <!-- Bricks Total -->
@@ -133,10 +134,22 @@
                                     <x-input-label for="chip_qty" :value="__('Chips QTY')" />
                                     <x-number-input id="chip_qty" class="block mt-1 w-full" name="chip_qty" :value="old('chip_qty')" required value="0"/>
                                 </div>
+
+                                <!-- Grade -->
+                                <div>
+                                    <x-input-label for="chips_grade" :value="__('Chips Grade')" />
+                                    <x-select-input id="chips_grade" name="chips_grade" required>
+                                        <option value="1">3/4</option>
+                                        <option value="2">Macadam</option>
+                                        <option value="3">Bats</option>
+                                        <option value="4">Chips</option>
+                                    </x-select-input>
+                                    <x-input-error :messages="$errors->get('chips_grade')" class="mt-2" />
+                                </div>
                                 <!-- Unit Price -->
                                 <div>
                                     <x-input-label for="chip_up" :value="__('Unit Price')" />
-                                    <x-text-input id="chip_up" class="block mt-1 w-full" type="number" name="chip_up" :value="old('chip_up')" required value="15"/>
+                                    <x-text-input id="chip_up" class="block mt-1 w-full" type="number" name="chip_up" :value="old('chip_up')" required value="100"/>
                                 </div>
                                 <!-- Total chips price -->
                                 <div>

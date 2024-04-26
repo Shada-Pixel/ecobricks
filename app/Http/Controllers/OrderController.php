@@ -42,6 +42,7 @@ class OrderController extends Controller
         $order->brick_up = $request->brick_up;
         $order->brick_total = $request->bricks_total;
         $order->chips_qty = $request->chip_qty;
+        $order->chips_grade = $request->chips_grade;
         $order->chips_up = $request->chip_up;
         $order->chips_total = $request->chips_total;
         $order->order_number = time();
@@ -100,6 +101,7 @@ class OrderController extends Controller
         $order->brick_up = $request->brick_up;
         $order->brick_total = $request->bricks_total;
         $order->chips_qty = $request->chip_qty;
+        $order->chips_grade = $request->chips_grade;
         $order->chips_up = $request->chip_up;
         $order->chips_total = $request->chips_total;
         $order->transport = $request->transport;

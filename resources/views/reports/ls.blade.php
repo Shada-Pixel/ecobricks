@@ -8,18 +8,18 @@
     <x-slot name="header">
         <div class="">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Priodic Sales Report') }}
+                {{ __('Ledger Sales Report') }}
             </h2>
-            <a href="{{route('customers.create')}}" class="mt-2"><x-primary-button>New Ledger</x-primary-button></a>
+            <a href="{{route('customers.create')}}" class=" mt-2"><x-primary-button>New Ledger</x-primary-button></a>
         </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-x-scroll">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="px-6 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center print:hidden gap-y-2 sm:gap-y-0">
                     <div class="">
-                        <form action="{{route('report.priod')}}" method="get" class="flex sm:gap-0 flex-wrap sm:flex-nowrap">
+                        <form action="{{route('report.lsakes')}}" method="get" class="flex sm:gap-0 flex-wrap sm:flex-nowrap">
 
                             @csrf
                             @method('GET')
@@ -31,8 +31,7 @@
                     </div>
                     <x-primary-button id="printbtn">Print</x-primary-button>
                 </div>
-                <div class="p-6 pb-10 print:p-0 print:pb-40 print:max-h-screen text-gray-900 printable print:min-w-full">
-
+                <div class="p-6 print:p-0 text-gray-900 printable print:min-w-full">
                     {{-- Print header --}}
                     <div class="p-6 print:p-0 print:flex justify-between items-center flex">
                         <div class="flex justify-start gap-5 items-center">
@@ -46,7 +45,7 @@
 
                         </div>
                         <div class="">
-                            <h2 class="text-4xl font-bold uppercase">{{ __('Priodic Sales Report') }}</h2>
+                            <h2 class="text-4xl font-bold uppercase">{{ __('Ledger Sales Report') }}</h2>
                             <div class="flex items-center justify-between">
                                 <p class="">Date: <span id="dateform">{{date('d-m-Y', strtotime($formdtae))}}</span> to <span id="dateto">{{date('d-m-Y', strtotime($todate))}}</span></p>
                                 <p class="text-lg">Last Challan: {{$cn}}</p>
@@ -57,19 +56,19 @@
                     <table class="table mb-0" id="orderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
-                                <th>Order Date</th>
-                                <th>Customer</th>
-                                <th>Note</th>
-                                <th>Challan</th>
-                                <th>Grade</th>
-                                <th>Bricks</th>
-                                <th>Rate</th>
-                                <th>Grade</th>
-                                <th>Chips</th>
-                                <th>Rate</th>
-                                <th>Bill</th>
-                                <th>Paid</th>
-                                <th>Due</th>
+                                <th class="text-left">Date</th>
+                                <th class="text-left">Customer</th>
+                                <th class="text-right">Note</th>
+                                <th class="text-right">Challan</th>
+                                <th class="text-right">Grade</th>
+                                <th class="text-right">Bricks</th>
+                                <th class="text-right">Rate</th>
+                                <th class="text-right">Grade</th>
+                                <th class="text-right">Chips</th>
+                                <th class="text-right">Rate</th>
+                                <th class="text-right">Bill</th>
+                                <th class="text-right">Paid</th>
+                                <th class="text-right">Due</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,6 +139,6 @@
     </div>
     <x-slot name="pagescript">
         <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-        <script src="{{asset('js/rangereport.js')}}"></script>
+        <script src="{{asset('js/legersales.js')}}"></script>
     </x-slot>
 </x-app-layout>
