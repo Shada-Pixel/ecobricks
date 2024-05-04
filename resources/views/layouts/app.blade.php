@@ -54,6 +54,8 @@
                             <p>LC: {{$lastc}}</p>
                             <p>UD: {{$ud}}</p>
                             <p>CN: {{$cn}}</p>
+                            <p>Bricks: {{$tb}}</p>
+                            <p>Chips: {{$tc}}</p>
                         </div>
                     </div>
                 </header>

@@ -23,9 +23,9 @@
 
                             @csrf
                             @method('GET')
-                            <x-text-input type="date" class="weekago" name="weekago" value="{{ old('weekago', $formdtae) }}"></x-text-input>
+                            <x-text-input type="date" class="weekago" name="weekago" value="{{date('Y-m-d', strtotime($formdtae))}}"></x-text-input>
                             <span class="mx-2">To</span>
-                            <x-text-input type="date" class="today" name="today" value="{{ old('today', $todate) }}"></x-text-input>
+                            <x-text-input type="date" class="today" name="today" value="{{date('Y-m-d', strtotime($todate))}}"></x-text-input>
                             <x-primary-button id="" class="ml-2">Filter</x-primary-button>
                         </form>
                     </div>
@@ -33,17 +33,8 @@
                 </div>
                 <div class="p-6 print:p-0 text-gray-900 printable print:min-w-full">
                     {{-- Print header --}}
-                    <div class="p-6 print:p-0 print:flex justify-between items-center flex">
-                        <div class="flex justify-start gap-5 items-center">
-                            <img src="{{asset('images/ebo.png')}}" alt="" srcset="" class="w-24">
-                            <div class="text-xs border border-gray-900 p-2">
-                                <p>DC License: 10/2014</p>
-                                <p>Doe License: 25562</p>
-                                <p>e-TIN No: 628446302955</p>
-                                <p>BIN No: 003936487-0801</p>
-                            </div>
-
-                        </div>
+                    <div class="p-6 print:px-0 print:py-10 print:flex justify-between flex items-start">
+                        <x-plogo></x-plogo>
                         <div class="">
                             <h2 class="text-4xl font-bold uppercase">{{ __('Ledger Sales Report') }}</h2>
                             <div class="flex items-center justify-between">
@@ -53,22 +44,22 @@
                         </div>
                     </div>
 
-                    <table class="table mb-0" id="orderTable">
+                    <table class="border table mb-0" id="orderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
-                                <th class="text-left">Date</th>
-                                <th class="text-left">Customer</th>
-                                <th class="text-right">Note</th>
-                                <th class="text-right">Challan</th>
-                                <th class="text-right">Grade</th>
-                                <th class="text-right">Bricks</th>
-                                <th class="text-right">Rate</th>
-                                <th class="text-right">Grade</th>
-                                <th class="text-right">Chips</th>
-                                <th class="text-right">Rate</th>
-                                <th class="text-right">Bill</th>
-                                <th class="text-right">Paid</th>
-                                <th class="text-right">Due</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Customer</th>
+                                <th class="text-center">Note</th>
+                                <th class="text-center">Challan</th>
+                                <th class="text-center">Grade</th>
+                                <th class="text-center">Bricks</th>
+                                <th class="text-center">Rate</th>
+                                <th class="text-center">Grade</th>
+                                <th class="text-center">Chips</th>
+                                <th class="text-center">Rate</th>
+                                <th class="text-center">Bill</th>
+                                <th class="text-center">Paid</th>
+                                <th class="text-center">Due</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,24 +104,22 @@
                                 <td class="text-right">{{$order->due_bill}}</td>
                             </tr>
                             @endforeach
-                        </tbody>
-                        <tfoot>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th class="text-right">Bricks: {{ $orders->sum('brick_qty')}}</th>
-                                <th></th>
-                                <th></th>
-                                <th class="text-right">Chips: {{ $orders->sum('chips_qty')}}</th>
-                                <th></th>
-                                <th class="text-right">Bill: {{ $orders->sum('total_bill')}}</th>
-                                <th class="text-right">Paid: {{ $orders->sum('paid_bill')}}</th>
-                                <th class="text-right">Due: {{ $orders->sum('due_bill')}}</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right font-semibold">Bricks: {{ $orders->sum('brick_qty')}}</td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right font-semibold">Chips: {{ $orders->sum('chips_qty')}}</td>
+                                <td></td>
+                                <td class="text-right font-semibold">Bill: {{ $orders->sum('total_bill')}}</td>
+                                <td class="text-right font-semibold">Paid: {{ $orders->sum('paid_bill')}}</td>
+                                <td class="text-right font-semibold">Due: {{ $orders->sum('due_bill')}}</td>
                             </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                     <x-printfooter></x-printfooter>
                 </div>

@@ -23,17 +23,8 @@
 
                 <div class="p-6 pb-10 print:p-0 print:pb-40 print:max-h-screen text-gray-900 printable print:min-w-full">
                     {{-- Print header --}}
-                    <div class="p-6 print:p-0 print:flex justify-between items-center flex">
-                        <div class="flex justify-start gap-5 items-center">
-                            <img src="{{asset('images/ebo.png')}}" alt="" srcset="" class="w-24">
-                            <div class="text-xs border border-gray-900 p-2">
-                                <p>DC License: 10/2014</p>
-                                <p>Doe License: 25562</p>
-                                <p>e-TIN No: 628446302955</p>
-                                <p>BIN No: 003936487-0801</p>
-                            </div>
-
-                        </div>
+                    <div class="p-6 print:px-0 print:py-10 print:flex justify-between flex items-start">
+                        <x-plogo></x-plogo>
                         <div class="">
                             <h2 class="text-4xl font-bold uppercase">{{ __('Receivable and Payable Report') }}</h2>
                             <div class="flex items-center justify-between">
@@ -44,17 +35,16 @@
                         </div>
                     </div>
 
-                    <table class="table mb-0" id="customerTable">
+                    <table class="border table mb-0" id="customerTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Sl.</th>
-                                <th class="text-left">Name</th>
-                                <th class="text-right">Bricks</th>
-                                <th class="text-right">Chips</th>
-                                <th class="text-right">Bill</th>
-                                <th class="text-right">Paid</th>
-                                <th class="text-right">Due</th>
-                                {{-- <th class="print:hidden">Action</th> --}}
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Bricks</th>
+                                <th class="text-center">Chips</th>
+                                <th class="text-center">Bill</th>
+                                <th class="text-center">Paid</th>
+                                <th class="text-center">Due</th>
                             </tr>
                         </thead>
                         <tbody class="ligth-body">
@@ -70,18 +60,16 @@
                                 <td class="text-right">{{ $customer->duebill() }}</td>
                             </tr>
                             @endforeach
-                        </tbody>
-                        <tfoot>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="text-right">Payable : {{$pay}}</td>
-                                <td class="text-right">Reciveable : {{$ric}}</td>
+                                <td class="text-right font-semibold">Payable : {{$pay}}</td>
+                                <td class="text-right font-semibold">Reciveable : {{$ric}}</td>
                             </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                     <x-printfooter></x-printfooter>
                 </div>

@@ -32,10 +32,15 @@ class AppServiceProvider extends ServiceProvider
             $cn = 'N/A';
         }
 
+        $tb =  Order::sum('brick_qty');
+        $tc =  Order::sum('chips_qty');
+
         {{  }}
         // Share variable with all views
         View::share('lastc',$latic);
         View::share('ud',$ud);
         View::share('cn',$cn);
+        View::share('tb',$tb);
+        View::share('tc',$tc);
     }
 }

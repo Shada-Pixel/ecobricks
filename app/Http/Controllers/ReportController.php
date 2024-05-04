@@ -113,6 +113,28 @@ class ReportController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function delivery(Request $request)
+    {
+
+        $formdtae = Carbon::now()->startOfYear();
+        $todate = Carbon::today();
+        if ($request->weekago) {
+            $formdtae = $request->weekago;
+        }
+        if ($request->today) {
+            $todate = $request->today;
+        }
+        $totalbricks =  Order::whereBetween('order_date', [$formdtae, $todate])->sum('brick_qty');
+        $totalchips =  Order::whereBetween('order_date', [$formdtae, $todate])->sum('chips_qty');
+
+
+
+        return view('reports.delivery',['totalbricks'=> $totalbricks, 'totalchips'=> $totalchips, 'formdtae'=>$formdtae, 'todate'=>$todate]);
+    }
+
+    /**
+     * Display the user's profile form.
+     */
     public function daterange(Request $request)
     {
         $formdtae = Carbon::now()->subWeek();

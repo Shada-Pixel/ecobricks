@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/priodreport','daterange')->name('report.priod');
         Route::get('/cashreport','cash')->name('report.cash');
         Route::get('/ledgersales','lsakes')->name('report.lsakes');
+        Route::get('/delivery','delivery')->name('report.delivery');
     });
 
     Route::resource('customers', CustomerController::class);
