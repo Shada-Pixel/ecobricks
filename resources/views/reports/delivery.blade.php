@@ -47,7 +47,7 @@
                     <div class="max-w-96 mx-auto flex justify-center">
 
 
-                        <table class="border border-red-900 table mb-0 max-w-96" id="orderTable">
+                        <table class="border table mb-0 max-w-96" id="orderTable">
 
                             <tbody>
                                 <tr class="border">
