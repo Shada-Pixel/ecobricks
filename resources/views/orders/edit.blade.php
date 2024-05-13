@@ -150,7 +150,7 @@
 
                             <div class="flex items-center justify-end mt-4">
                                 <x-primary-button class="ms-4" id="submitButton">
-                                    {{ __('Update') }}
+                                    {{ __('Approve and Update') }}
                                 </x-primary-button>
                             </div>
                         </form>

@@ -25,6 +25,12 @@
                         {{ __('Orders') }}
                     </x-nav-link>
 
+                    @if ($pendingOrder > 0)
+                    <x-nav-link :href="route('porder')" :active="request()->routeIs('porder')">
+                        {{ __('Pending Orders')}} &nbsp;<span class="text-brick">{{' (' . $pendingOrder . ')'}}</span>
+                    </x-nav-link>
+                    @endif
+
 
                 </div>
             </div>
@@ -119,6 +125,13 @@
             <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
                 {{ __('Orders') }}
             </x-responsive-nav-link>
+
+
+            @if ($pendingOrder > 0)
+                <x-responsive-nav-link :href="route('porder')" :active="request()->routeIs('porder')">
+                    {{ __('Pending Orders'). ' (' . $pendingOrder . ')' }}
+                </x-responsive-nav-link>
+            @endif
         </div>
         @auth
 

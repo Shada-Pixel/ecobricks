@@ -51,11 +51,11 @@
                         @endif
 
                         <div class="text-left text-sm">
-                            <p>LC: {{$lastc}}</p>
-                            <p>UD: {{$ud}}</p>
-                            <p>CN: {{$cn}}</p>
-                            <p>Bricks: {{$tb}}</p>
-                            <p>Chips: {{$tc}}</p>
+                            <p>LC: {{$lastc ? $lastc : 'N/A'}}</p>
+                            <p>UD: {{$ud ? $ud : 'N/A'}}</p>
+                            <p>CN: {{$cn ? $cn : 'N/A'}}</p>
+                            <p>Bricks: {{$tb ? $tb : 0}}</p>
+                            <p>Chips: {{$tc ? $tc : 0}}</p>
                         </div>
                     </div>
                 </header>

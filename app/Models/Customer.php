@@ -29,7 +29,7 @@ class Customer extends Model
      */
     public function orders(){
 
-        return $this->hasMany(Order::class, 'customer_id', 'id');
+        return $this->hasMany(Order::class, 'customer_id', 'id')->where('status', 2);
     }
 
 
@@ -48,7 +48,7 @@ class Customer extends Model
     {
         return $this->orders()->sum('due_bill');
     }
-    
+
     public function bricks()
     {
         return $this->orders()->sum('brick_qty');

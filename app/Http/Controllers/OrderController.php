@@ -14,8 +14,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('id', 'DESC')->get();
+        $orders = Order::orderBy('id', 'DESC')->where('status', 2)->get();
         return view('orders.index',['orders'=> $orders]);
+    }
+
+    /**
+     * Display a listing of the pending resource.
+     */
+    public function porder()
+    {
+        $orders = Order::orderBy('id', 'DESC')->where('status', 1)->get();
+        return view('orders.porder',['orders'=> $orders]);
     }
 
     /**
@@ -60,10 +69,10 @@ class OrderController extends Controller
             $order->payment_type = 2;
         }
 
-        if ($request->due != 0) {
-            $order->status = 1;
-        }
-
+        // if ($request->due != 0) {
+        //     $order->status = 1;
+        // }
+        $order->status = 1;
         $order->order_date = $request->orderdate;
         $order->save();
 
@@ -121,9 +130,10 @@ class OrderController extends Controller
             $order->payment_type = 2;
         }
 
-        if ($request->due != 0) {
-            $order->status = 1;
-        }
+        // if ($request->due != 0) {
+        //     $order->status = 1;
+        // }
+        $order->status = 2;
 
         $order->order_date = $request->orderdate;
         $order->update();

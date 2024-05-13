@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         $tb =  Order::sum('brick_qty');
         $tc =  Order::sum('chips_qty');
+        $pendingOrder = Order::where('status', 1)->count();
 
         {{  }}
         // Share variable with all views
@@ -42,5 +43,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('cn',$cn);
         View::share('tb',$tb);
         View::share('tc',$tc);
+        View::share('pendingOrder',$pendingOrder);
     }
 }
