@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             // Customer
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
             // Brick
             $table->integer('brick_qty')->default(0);
