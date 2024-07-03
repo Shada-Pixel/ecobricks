@@ -1,29 +1,62 @@
+.sp-table{
+    width: 98%;
+    font-size: 16px;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+.sp-table thead{
+    font-size: 16px;
+    border: 1px solid #212529;
+    background-color: #c9d8ee;
+}
 
+.sp-table th{
+    background-color: #0db8a780;
+}
+.sp-table th,
+.sp-table td{
+    border: 1px solid #212529;
+    padding: 4px;
+}
+.sp-table td{
+    background-color: transparent;
+}
+
+.sp-table tbody tr:nth-child(even) {
+    background-color: #0db8a733;
+}
+
+.sp-table a{
+    text-decoration: none;
+}
 /* Print media */
 @media print {
 
 
-    .table {
+    .sp-table {
         margin-top: 30px !important;
     }
-    
-    .table td {
+
+    .sp-table td {
         padding: none !important;
-        border: 1px solid #110A57 !important;
+        border: 1px solid #212529 !important;
     }
 
-    .table .ligth th {
+    .sp-table .ligth th {
         padding: 5px !important;
-        border: 1px solid #110A57 !important;
+        border: 1px solid #212529 !important;
         text-transform: capitalize;
         font-size: 14px;
         line-height: 22px;
-        background: #f4f5fa;
-        color: #110A57;
+        background: #0db8a733;
+        color: #212529;
     }
 }
 
 
 
 
-
+.dt-container .dt-length .dt-input {
+	width: 70px;
+	margin-right: 10px;
+}

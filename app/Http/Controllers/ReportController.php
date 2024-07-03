@@ -146,7 +146,7 @@ class ReportController extends Controller
             $todate = $request->today;
         }
 
-        $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->get();
+        $orders =  Order::whereBetween('order_date', [$formdtae, $todate])->orderBy('chalan_number', 'ASC')->get();
         return view('reports.daterange',['orders'=> $orders, 'formdtae'=>$formdtae, 'todate'=>$todate]);
     }
 

@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <table class="border table mb-0" id="orderTable">
+                    <table class="border sp-table mb-0" id="orderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th class="text-center">Date</th>

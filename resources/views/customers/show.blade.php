@@ -100,17 +100,18 @@
                             <p>Date: <span id="dateto"></span></p>
                         </div>
                     </div>
-                    <table class="table mb-0" id="oorderTable">
+                    <table class="sp-table mb-0" id="oorderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Order Date</th>
                                 <th>Challan</th>
-                                <th>Order No.</th>
+                                <th>Order Note</th>
                                 <th>Type</th>
                                 <th>Grade</th>
                                 <th>Bricks</th>
+                                <th>B.Rate</th>
                                 <th>Chips</th>
-                                <th>Rate</th>
+                                <th>C.Rate</th>
                                 <th class="text-right">Bill</th>
                                 <th class="text-right">Paid</th>
                                 <th class="text-right">Due</th>
@@ -122,22 +123,13 @@
                             <tr>
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
                                 <td>{{ $order->chalan_number }}</td>
-                                <td>{{ $order->order_number }}</td>
-
-                                {{-- <td>@if ($order->transport == 1)
-                                    Trolly
-                                @elseif ($order->transport == 2)
-                                Truck
-                                @elseif ($order->transport == 3)
-                                Alom Shadhu
-                                @else()
-                                Self
-                                @endif</td> --}}
+                                <td>{{ $order->note? $order->note : '' }}</td>
                                 <td>@if ($order->type == 1) F @else M @endif </td>
                                 <td>@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
                                 <td>{{ $order->brick_qty }}</td>
-                                <td>{{ $order->chips_qty }}</td>
                                 <td>{{ $order->brick_up }}</td>
+                                <td>{{ $order->chips_qty }}</td>
+                                <td>{{ $order->chips_up }}</td>
                                 <td class="text-right">{{ $order->total_bill }}</td>
                                 <td class="text-right">{{ $order->paid_bill }}</td>
                                 <td class="text-right">{{ $order->due_bill }}</td>
@@ -165,7 +157,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td><p class="mb-0 text-right">Bricks: {{ $customer->bricks() }}</p></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><p class="mb-0 text-right">Total Bill: {{ $customer->totalbill() }}</p></td>

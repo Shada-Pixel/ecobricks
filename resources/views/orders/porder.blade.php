@@ -27,8 +27,9 @@
                                 <th>Grade</th>
                                 <th>O. Nub.</th>
                                 <th>Bricks</th>
+                                <th>B.Rate</th>
                                 <th>Chips</th>
-                                <th>Rate</th>
+                                <th>C.Rate</th>
                                 <th>Bill</th>
                                 <th>Paid</th>
                                 <th>Due</th>
@@ -48,8 +49,9 @@
                                     </a>
                                 </td>
                                 <td>{{ $order->brick_qty }}</td>
-                                <td>{{ $order->chips_qty }}</td>
                                 <td>{{ $order->brick_up }}</td>
+                                <td>{{ $order->chips_qty }}</td>
+                                <td>{{ $order->chips_up }}</td>
                                 <td>{{ $order->total_bill }}</td>
                                 <td>{{ $order->paid_bill }}</td>
                                 <td>{{ $order->due_bill }}</td>

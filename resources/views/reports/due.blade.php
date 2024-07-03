@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <table class="border table mb-0" id="customerTable">
+                    <table class="border sp-table mb-0" id="customerTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
                                 <th>Sl.</th>

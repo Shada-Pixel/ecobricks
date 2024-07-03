@@ -47,20 +47,27 @@
                     <div class="max-w-96 mx-auto flex justify-center">
 
 
-                        <table class="border table mb-0 max-w-96" id="orderTable">
+                        <table class=" sp-table mb-0 max-w-96" id="orderTable">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Converted to Bricks</th>
+                                </tr>
+                            </thead>
 
                             <tbody>
-                                <tr class="border">
+                                <tr class="">
                                     <td>Total Bricks</td>
-                                    <td class="text-right border">{{$totalbricks}}</td>
-                                    <td class="text-right border">{{$totalbricks}}</td>
+                                    <td class="text-right ">{{$totalbricks}}</td>
+                                    <td class="text-right ">{{$totalbricks}}</td>
                                 </tr>
-                                <tr class="border">
+                                <tr class="">
                                     <td>Total Chips</td>
-                                    <td class="text-right border">{{$totalchips}}</td>
-                                    <td class="text-right border">{{$totalchips*10}}</td>
+                                    <td class="text-right ">{{$totalchips}}</td>
+                                    <td class="text-right ">{{$totalchips*10}}</td>
                                 </tr>
-                                <tr class="border">
+                                <tr class="">
                                     <td></td>
                                     <td></td>
                                     <td class="text-right">Total: {{$totalbricks+($totalchips*10)}}</td>
