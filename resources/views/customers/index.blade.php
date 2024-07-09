@@ -44,7 +44,7 @@
                                 <td class="print:hidden">
                                     <div class="flex gap-2 text-xl">
                                         <a class="bg-green-400 p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                            href="{{ route('customers.show', $customer->id) }}"><i class="ri-eye-line mr-0"></i><span class="icon-[solar--eye-outline]"></span>
+                                            href="{{ route('customers.show', $customer->id) }}"><i class="ri-eye-line mr-0"></i><span class="icon-[solar--eye-outline]"></span></a>
                                         <a class="bg-brick p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
                                             href="{{ route('customers.edit', $customer->id) }}"><i class="ri-pencil-line mr-0"></i>
                                         </a>

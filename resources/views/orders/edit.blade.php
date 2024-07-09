@@ -64,6 +64,12 @@
                                 </div>
                                 <!-- Note -->
                                 <div class="flex-grow">
+                                    <x-input-label for="description" :value="__('Order description')" />
+                                    <x-text-input id="description" class="block mt-1 w-full" name="description" value="{{$order->desc ? $order->desc : ''}}"/>
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                </div>
+                                <!-- Note -->
+                                <div class="flex-grow">
                                     <x-input-label for="note" :value="__('Order note')" />
                                     <x-text-input id="note" class="block mt-1 w-full" name="note" value="{{$order->note ? $order->note : ''}}"/>
                                     <x-input-error :messages="$errors->get('note')" class="mt-2" />
@@ -124,7 +130,7 @@
                                 <!-- Unit Price -->
                                 <div>
                                     <x-input-label for="chip_up" :value="__('Unit Price')" />
-                                    <x-text-input id="chip_up" class="block mt-1 w-full" type="number" name="chip_up" :value="old('chip_up')" required value="{{$order->chips_price ? $order->chips_price : 100}}"/>
+                                    <x-text-input id="chip_up" class="block mt-1 w-full" type="number" name="chip_up" :value="old('chip_up')" required value="{{$order->chips_up ? $order->chips_up : 100}}"/>
                                 </div>
                                 <!-- Total chips price -->
                                 <div>
@@ -136,7 +142,13 @@
                             <hr class="mt-4">
                             <div class="">
                                 <div class="mt-4 flex justify-end items-center">
-                                    <p>Subtotal:  </p><x-text-input id="subtotal" class="block ml-4" type="number" name="subtotal" value='{{$order->total_bill ? $order->total_bill : 0 }}'/>
+                                    <p>Subtotal:  </p><x-text-input id="subtotal" class="block ml-4" type="number" name="subtotal" value='{{$order->sub_total_bill ? $order->sub_total_bill : 0 }}'/>
+                                </div>
+                                <div class="mt-2 flex justify-end items-center">
+                                    <p>Discount:  </p><x-text-input id="order_discount" class="block ml-4" type="number" name="discount" value='{{$order->discount ? $order->discount : 0 }}' />
+                                </div>
+                                <div class="mt-2 flex justify-end items-center">
+                                    <p>Total:  </p><x-text-input id="total" class="block ml-4" type="number" name="total" value='{{$order->total_bill ? $order->total_bill : 0 }}' readonly/>
                                 </div>
                                 <div class="mt-2 flex justify-end items-center">
                                     <p>Paid:  </p><x-text-input id="order_paid" class="block ml-4" type="number" name="paid" value='{{$order->paid_bill ? $order->paid_bill : 0 }}'/>
@@ -145,6 +157,7 @@
                                     <p>Due:  </p><x-text-input id="order_due" class="block ml-4" type="number" name="due" value='{{$order->due_bill ? $order->due_bill : 0 }}'/>
                                 </div>
                             </div>
+
 
 
 
@@ -190,6 +203,7 @@
                     // Update result field
                     $('#bricks_total').val(brickstotal);
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
                 });
 
@@ -204,13 +218,21 @@
                     // Update result field
                     $('#chips_total').val(chipstotal);
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
                 });
 
                 $('#chips_total, #bricks_total').change(function() {
 
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
+                });
+
+                // Order discount
+                $('#order_discount').change(function() {
+                    calculatedue();
+                    caltotal ();
                 });
 
                 $('#subtotal, #order_paid').change(function() {calculatedue();});
@@ -242,6 +264,17 @@
                 // console.log(subtotal);
             }
 
+            // calculate total
+            function caltotal (){
+                var st = $('#subtotal').val();
+                var od = $('#order_discount').val();
+                var pfst = parseFloat(st) || 0;
+                var pfod = parseFloat(od) || 0;
+
+                var total = pfst - od;
+                $('#total').val(total);
+            }
+
             function getToday(){
                 const local = new Date();
                 local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
@@ -249,7 +282,7 @@
             }
 
             function calculatedue() {
-                var st = $('#subtotal').val();
+                var st = $('#total').val();
                 var op = parseFloat($('#order_paid').val()) || 0;
                 var due = st - op;
                 $('#order_due').val(due);

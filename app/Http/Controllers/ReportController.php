@@ -137,6 +137,7 @@ class ReportController extends Controller
      */
     public function daterange(Request $request)
     {
+
         $formdtae = Carbon::now()->subWeek();
         $todate = Carbon::today();
         if ($request->weekago) {

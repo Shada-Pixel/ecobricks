@@ -23,6 +23,7 @@ class Order extends Model
         'order_number',
         'transport',
         'type',
+        'sub_total_bill',
         'total_bill',
         'paid_bill',
         'due_bill',
@@ -30,9 +31,10 @@ class Order extends Model
         'status',
         'order_date',
         'note',
-        'chalan_number'
+        'chalan_number',
+        'desc',
+        'discount'
     ];
-
 
     protected $with=['customer'];
 

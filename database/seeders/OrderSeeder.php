@@ -25,12 +25,13 @@ class OrderSeeder extends Seeder
              $bup = 9.5;
              $bt= $bq * $bup;
              $cq = rand(0,150);
+             $discount = rand(0,99);
              $cup = 100;
              $ct = $cq * $cup;
 
              $tb = $bt + $ct;
              $pb =  rand(0, $tb);
-             $db = $tb - $pb;
+             $db = $tb - ($pb-$discount);
 
              $cid = $randomCustomerWithNull;
              if ($db != 0) {
@@ -38,26 +39,29 @@ class OrderSeeder extends Seeder
              }
 
              DB::table('orders')->insert([
-                 'customer_id' => $randomCustomerWithNull, // Assuming you have 50 customers seeded
-                 'brick_qty' => $bq,
-                 'brick_grade' => rand(1, 3),
-                 'brick_up' => $bup,
-                 'brick_total' => $bt,
-                 'chips_qty' => $cq,
-                 'chips_grade' => rand(1,4),
-                 'chips_up' => $cup,
-                 'chips_total' => $ct,
-                 'order_number' => time()+$i,
-                 'transport' => rand(1, 4),
-                 'type' => rand(1, 2),
-                 'total_bill' => $tb,
-                 'paid_bill' => $pb,
-                 'due_bill' => $db,
-                 'note' => 'Sample note',
-                 'chalan_number' => 9240 + $i,
-                 'payment_type' => rand(1, 2),
-                 'status' => rand(1, 2),
-                 'order_date' => $orderDate,
+                'customer_id' => $randomCustomerWithNull, // Assuming you have 50 customers seeded
+                'brick_qty' => $bq,
+                'brick_grade' => rand(1, 3),
+                'brick_up' => $bup,
+                'brick_total' => $bt,
+                'chips_qty' => $cq,
+                'chips_grade' => rand(1,4),
+                'chips_up' => $cup,
+                'chips_total' => $ct,
+                'order_number' => time()+$i,
+                'transport' => rand(1, 4),
+                'type' => rand(1, 2),
+                'sub_total_bill' => $tb,
+                'total_bill' => $tb-$discount,
+                'paid_bill' => $pb,
+                'due_bill' => $db,
+                'note' => 'Sample note',
+                'chalan_number' => 9240 + $i,
+                'payment_type' => rand(1, 2),
+                'status' => rand(1, 2),
+                'order_date' => $orderDate,
+                'desc' => 'Description of this order',
+                'discount' => $discount
              ]);
          }
     }

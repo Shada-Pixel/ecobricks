@@ -36,10 +36,13 @@ return new class extends Migration
             $table->integer('order_number')->uniqid();
             $table->tinyInteger('transport')->default(1)->comment('1 => Trolly, 2 => Truck, 3=> Alom Shadhu, 4 = Self');
             $table->tinyInteger('type')->default(1)->comment('1 => F, 2 => M');
+            $table->integer('sub_total_bill')->default(0);
             $table->integer('total_bill')->default(0);
             $table->integer('paid_bill')->default(0);
             $table->string('due_bill')->default(0);
             $table->longtext('note')->nullable();
+            $table->longtext('desc')->nullable();
+            $table->integer('discount')->default(0)->nullable();
             $table->integer('chalan_number')->nullable();
             $table->tinyInteger('payment_type')->default(1)->comment('1 => cash, 2 => due');
             $table->tinyInteger('status')->default(2)->comment('1 => pending, 2 => complete');

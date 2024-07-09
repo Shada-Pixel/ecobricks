@@ -5,6 +5,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,6 +33,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/ledgersales','lsakes')->name('report.lsakes');
         Route::get('/delivery','delivery')->name('report.delivery');
     });
+
+    Route::controller(FileController::class)->group(function () {
+        Route::get('/files', 'index')->name('files.index');
+        Route::post('/files', 'store')->name('files.store');
+        Route::get('/files/{id}', 'show')->name('files.show');
+        Route::delete('/files/{id}', 'destroy')->name('files.destroy');
+    });
+
+
 
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);

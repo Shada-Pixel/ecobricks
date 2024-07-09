@@ -57,10 +57,13 @@ class OrderController extends Controller
         $order->order_number = time();
         $order->transport = $request->transport;
         $order->type = $request->order_type;
-        $order->total_bill = $request->subtotal;
+        $order->sub_total_bill = $request->subtotal;
+        $order->discount = $request->discount;
+        $order->total_bill = $request->total;
         $order->paid_bill = $request->paid;
         $order->due_bill = $request->due;
         $order->note = $request->note;
+        $order->desc = $request->description;
         $order->chalan_number = $request->chalan_number;
 
         if ($request->due <= 0) {
@@ -84,7 +87,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show',['order' => $order]);
     }
 
     /**
@@ -115,12 +118,20 @@ class OrderController extends Controller
         $order->chips_total = $request->chips_total;
         $order->transport = $request->transport;
         $order->type = $request->order_type;
-        $order->total_bill = $request->subtotal;
+        $order->sub_total_bill = $request->subtotal;
+        $order->discount = $request->discount;
+        $order->total_bill = $request->total;
         $order->paid_bill = $request->paid;
         $order->due_bill = $request->due;
+        $order->desc = $request->description;
+
         if ($request->note) {
             # code...
             $order->note = $request->note;
+        }
+        if ($request->description) {
+            # code...
+            $order->desc = $request->description;
         }
         $order->chalan_number = $request->chalan_number;
 

@@ -83,9 +83,16 @@
                                 <!-- Chalan number -->
                                 <div>
                                     <x-input-label for="chalan_number" :value="__('Chalan Number')" />
-                                    <x-text-input id="chalan_number" class="block mt-1 w-full onlynumber" name="chalan_number" />
+                                    <x-text-input id="chalan_number" class="block mt-1 w-full onlynumber" name="chalan_number" value="{{$cn ? $cn+1 : 0}}"/>
                                     <x-input-error :messages="$errors->get('chalan_number')" class="mt-2" />
                                 </div>
+                                <!-- Note -->
+                                <div class="flex-grow">
+                                    <x-input-label for="description" :value="__('Order description')" />
+                                    <x-text-input id="description" class="block mt-1 w-full" name="description" />
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                </div>
+
                                 <!-- Note -->
                                 <div class="flex-grow">
                                     <x-input-label for="note" :value="__('Order note')" />
@@ -164,6 +171,12 @@
                                     <p>Subtotal:  </p><x-text-input id="subtotal" class="block ml-4" type="number" name="subtotal" value='0' readonly/>
                                 </div>
                                 <div class="mt-2 flex justify-end items-center">
+                                    <p>Discount:  </p><x-text-input id="order_discount" class="block ml-4" type="number" name="discount" value='0' />
+                                </div>
+                                <div class="mt-2 flex justify-end items-center">
+                                    <p>Total:  </p><x-text-input id="total" class="block ml-4" type="number" name="total" value='0' readonly/>
+                                </div>
+                                <div class="mt-2 flex justify-end items-center">
                                     <p>Paid:  </p><x-text-input id="order_paid" class="block ml-4" type="number" name="paid" value='0' />
                                 </div>
                                 <div class="mt-2 flex justify-end items-center">
@@ -215,6 +228,7 @@
                     // Update result field
                     $('#bricks_total').val(brickstotal);
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
                 });
 
@@ -229,15 +243,23 @@
                     // Update result field
                     $('#chips_total').val(chipstotal);
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
                 });
 
                 $('#chips_total, #bricks_total').change(function() {
 
                     calsubtotal ();
+                    caltotal ();
                     calculatedue();
                 });
 
+
+                // Order discount
+                $('#order_discount').change(function() {
+                    calculatedue();
+                    caltotal ();
+                });
                 $('#subtotal, #order_paid').change(function() {calculatedue();});
 
 
@@ -267,6 +289,18 @@
                 // console.log(subtotal);
             }
 
+
+            // calculate total
+            function caltotal (){
+                var st = $('#subtotal').val();
+                var od = $('#order_discount').val();
+                var pfst = parseFloat(st) || 0;
+                var pfod = parseFloat(od) || 0;
+
+                var total = pfst - od;
+                $('#total').val(total);
+            }
+
             function getToday(){
                 const local = new Date();
                 local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
@@ -274,7 +308,7 @@
             }
 
             function calculatedue() {
-                var st = $('#subtotal').val();
+                var st = $('#total').val();
                 var op = parseFloat($('#order_paid').val()) || 0;
                 var due = st - op;
                 $('#order_due').val(due);

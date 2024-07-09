@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         }else{
             $latic = 'N/A';
             $ud = 'N/A';
-            $cn = 'N/A';
+            $cn = 0;
         }
 
         $tb =  Order::sum('brick_qty');
