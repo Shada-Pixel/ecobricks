@@ -31,17 +31,30 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request;
         $request->validate([
-            'file' => 'required|mimes:pdf,doc,docx,jpeg,jpg,png|max:2048',
+            'file' => 'required|mimes:pdf,doc,docx,jpeg,jpg,png',
         ]);
 
-        $file = $request->file('file');
-        $path = $file->store('uploads');
 
-        $fileModel = new File();
-        $fileModel->name = $file->getClientOriginalName();
-        $fileModel->path = $path;
-        $fileModel->save();
+
+        // Photo
+        if ($request->file('file')) {
+            $file = $request->file('file');
+
+            $fileModel = new File();
+
+            $image_full_name = time().'file'.'.'.$file->getClientOriginalExtension();
+            $upload_path = 'officedocuments/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $file->move($upload_path, $image_full_name);
+
+            $fileModel->name = $file->getClientOriginalName();
+            $fileModel->path = $image_url;
+            $fileModel->mime_type = $file->getClientMimeType();
+            $fileModel->save();
+        }
 
         return redirect()->back()->with('success', 'File uploaded successfully.');
     }
@@ -49,10 +62,24 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(File $file)
+    public function show($id)
     {
         $file = File::findOrFail($id);
-        return Storage::download($file->path, $file->name);
+
+        return view('files.preview', compact('file'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function downloadFile($id)
+    {
+
+
+        $file = File::findOrFail($id);
+        $path = 'app/public/' . $file->path;
+
+        return response()->download($path, $file->name);
     }
 
     /**
@@ -74,7 +101,7 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(File $file)
+    public function destroy($id)
     {
         $file = File::findOrFail($id);
         Storage::delete($file->path);

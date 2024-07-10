@@ -16,7 +16,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-4 hidden sm:block">
                 <div class="p-6">
                     <h2 class="font-semibold text-xl text-dblue leading-tight">Upload New file</h2>
-                    <form method="POST" action="{{ route('files.store') }}" id="orderForm">
+                    <form method="POST" action="{{ route('files.store') }}" id="orderForm" enctype="multipart/form-data">
                         @csrf
 
 
@@ -27,7 +27,7 @@
                         </div>
 
 
-                        <div class="flex items-center justify-end mt-4">
+                        <div class="flex items-center justify-end mt-4 ">
                             <x-primary-button class="ms-4" id="submitButton">
                                 {{ __('Upload') }}
                             </x-primary-button>
@@ -41,9 +41,38 @@
 
                 <div class="p-6 text-gray-900">
                     <h2 class="font-semibold text-xl text-dblue leading-tight">All Files</h2>
-                    <div class="">
+                    <table class="sp-table">
+                        <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($files as $file)
+                            <tr>
+                                <td>{{ $file->name }}</td>
+                                <td class="print:hidden flex justify-end gap-4">
+                                    <div class="flex gap-2 text-xl">
+                                        @if (in_array(pathinfo($file->name, PATHINFO_EXTENSION), ['jpeg', 'jpg', 'png','pdf']))
+                                        <a class="bg-green-400 p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
+                                        href="{{ route('files.show', $file->id) }}"><i class="ri-eye-line mr-0"></i><span class="icon-[solar--eye-outline]"></span></a>
+                                        @endif
 
-                    </div>
+                                        <a class="bg-brick p-2 rounded-sm flex justify-center items-center text-white text-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+                                            href="{{ route('files.download', $file->id) }}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 19h18v2H3zM13 9h7l-8 8l-8-8h7V1h2z"/></svg>
+                                        </a>
+                                        <form action="{{ route('files.destroy', $file->id) }}" method="POST" style="margin-bottom: 5px">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="bg-red-500 p-2 rounded-sm text-sm flex justify-center items-center text-white deleteBtn"  data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="ri-delete-bin-line mr-0"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
                 </div>
             </div>

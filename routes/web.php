@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/files', 'index')->name('files.index');
         Route::post('/files', 'store')->name('files.store');
         Route::get('/files/{id}', 'show')->name('files.show');
+        Route::get('/files/download/{id}', 'downloadFile')->name('files.download');
         Route::delete('/files/{id}', 'destroy')->name('files.destroy');
     });
 
