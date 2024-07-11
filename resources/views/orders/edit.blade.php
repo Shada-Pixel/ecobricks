@@ -24,7 +24,7 @@
                                 <!-- Date -->
                                 <div class="mt-4">
                                     <x-input-label for="orderdate" :value="__('Date')" />
-                                    <x-text-input id="orderdate" class="block mt-1 w-full" type="date" name="orderdate" />
+                                    <x-text-input id="orderdate" class="block mt-1 w-full" type="date" name="orderdate" value="{{ old('orderdate', date('Y-m-d', strtotime($order->order_date))) }}"/>
                                 </div>
                                 <!-- Transport -->
                                 <div class="mt-4">

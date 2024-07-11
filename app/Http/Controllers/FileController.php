@@ -75,11 +75,14 @@ class FileController extends Controller
     public function downloadFile($id)
     {
 
-
         $file = File::findOrFail($id);
-        $path = 'app/public/' . $file->path;
+        $filePath = public_path($file->path);
 
-        return response()->download($path, $file->name);
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $file->name);
+        } else {
+            return redirect()->back()->with('error', 'File not found.');
+        }
     }
 
     /**
@@ -104,8 +107,13 @@ class FileController extends Controller
     public function destroy($id)
     {
         $file = File::findOrFail($id);
-        Storage::delete($file->path);
-        $file->delete();
+        $filePath = public_path($file->path);
+
+        if (file_exists($filePath)) {
+            unlink($filePath); // Delete the file from the server
+        }
+
+        $file->delete(); // Delete the file record from the database
 
         return redirect()->back()->with('success', 'File deleted successfully.');
     }

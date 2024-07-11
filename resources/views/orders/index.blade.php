@@ -39,7 +39,7 @@
                         <tbody class="ligth-body">
                             @foreach ($orders as $order)
                             <tr>
-                                <td>{{ $order->order_date }}</td>
+                                <td>{{date('d-M-y', strtotime($order->order_date))}}</td>
                                 <td>{{ $order->chalan_number }}</td>
                                 <td>@if ($order->type == 1) F @else M @endif </td>
                                 <td>@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
