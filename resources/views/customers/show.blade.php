@@ -101,15 +101,15 @@
                                 <th>Order Date</th>
                                 <th>Challan</th>
                                 <th>Order Note</th>
-                                <th>Type</th>
-                                <th>Grade</th>
-                                <th>Bricks</th>
-                                <th>B.Rate</th>
-                                <th>Chips</th>
-                                <th>C.Rate</th>
-                                <th class="text-right">Bill</th>
-                                <th class="text-right">Paid</th>
-                                <th class="text-right">Due</th>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Grade</th>
+                                <th class="text-center">Bricks</th>
+                                <th class="text-center">B.Rate</th>
+                                <th class="text-center">Chips</th>
+                                <th class="text-center">C.Rate</th>
+                                <th class="text-center">Bill</th>
+                                <th class="text-center">Paid</th>
+                                <th class="text-center">Due</th>
                                 {{-- <th class="print:hidden">Action</th> --}}
                             </tr>
                         </thead>
@@ -119,12 +119,12 @@
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
                                 <td>{{ $order->chalan_number }}</td>
                                 <td>{{ $order->note? $order->note : '' }}</td>
-                                <td>@if ($order->type == 1) F @else M @endif </td>
-                                <td>@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
-                                <td>{{ $order->brick_qty }}</td>
-                                <td>{{ $order->brick_up }}</td>
-                                <td>{{ $order->chips_qty }}</td>
-                                <td>{{ $order->chips_up }}</td>
+                                <td class="text-center">@if ($order->type == 1) F @else M @endif </td>
+                                <td class="text-center">@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
+                                <td class="text-center">{{ $order->brick_qty }}</td>
+                                <td class="text-center">{{ $order->brick_up }}</td>
+                                <td class="text-center">{{ $order->chips_qty }}</td>
+                                <td class="text-center">{{ $order->chips_up }}</td>
                                 <td class="text-right">{{ $order->total_bill }}</td>
                                 <td class="text-right">{{ $order->paid_bill }}</td>
                                 <td class="text-right">{{ $order->due_bill }}</td>

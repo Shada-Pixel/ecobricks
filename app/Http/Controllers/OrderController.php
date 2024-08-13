@@ -95,7 +95,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('name', 'asc')->get();
         return view('orders.edit',['customers'=> $customers, 'order' => $order]);
     }
 

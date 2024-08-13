@@ -12,7 +12,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('name', 'asc')->get();
         return view('dashboard',['customers'=> $customers]);
     }
     /* Return to the dashboad pos entry */

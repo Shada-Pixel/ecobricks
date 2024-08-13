@@ -24,7 +24,7 @@
                                 <!-- Date -->
                                 <div class="mt-4">
                                     <x-input-label for="orderdate" :value="__('Date')" />
-                                    <x-text-input id="orderdate" class="block mt-1 w-full" type="date" name="orderdate" value="{{ old('orderdate', date('Y-m-d', strtotime($order->order_date))) }}"/>
+                                    <x-text-input id="orderdate" class="block mt-1 w-full" type="date" name="orderdate" value="{{date('Y-m-d', strtotime($order->order_date))}}"/>
                                 </div>
                                 <!-- Transport -->
                                 <div class="mt-4">
@@ -98,7 +98,7 @@
                                 <!-- Unit Price -->
                                 <div>
                                     <x-input-label for="brick_up" :value="__('Unit Price')" />
-                                    <x-text-input id="brick_up" class="block mt-1 w-full" type="number" name="brick_up" :value="old('brick_up')" required value="{{$order->brick_price ? $order->brick_price : 9.5}}"/>
+                                    <x-text-input id="brick_up" class="block mt-1 w-full" type="number" name="brick_up" :value="old('brick_up')" required value="{{$order->brick_up ? $order->brick_up : 9.5}}"/>
                                     <x-input-error :messages="$errors->get('brick_up')" class="mt-2" />
                                 </div>
                                 <!-- Bricks Total -->
@@ -186,10 +186,7 @@
                 });
 
 
-                 // JQuery
-                $(document).ready( function() {
-                    $('#orderdate').val(getToday());
-                });
+
 
 
 
