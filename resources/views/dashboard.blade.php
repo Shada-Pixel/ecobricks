@@ -224,7 +224,7 @@
                     var bricksqty = parseFloat($('#brick_qty').val()) || 0;
                     var bricksup = parseFloat($('#brick_up').val()) || 0;
                     // Calculate result
-                    var brickstotal = bricksqty * bricksup;
+                    var brickstotal = Math.round(bricksqty * bricksup);
                     // Update result field
                     $('#bricks_total').val(brickstotal);
                     calsubtotal ();
@@ -239,7 +239,7 @@
                     var chipsqty = parseFloat($('#chip_qty').val()) || 0;
                     var chipsup = parseFloat($('#chip_up').val()) || 0;
                     // Calculate result
-                    var chipstotal = chipsqty * chipsup;
+                    var chipstotal = Math.round(chipsqty * chipsup);
                     // Update result field
                     $('#chips_total').val(chipstotal);
                     calsubtotal ();
