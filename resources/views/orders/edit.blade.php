@@ -89,9 +89,9 @@
                                 <div>
                                     <x-input-label for="name" :value="__('Bricks Grade')" />
                                     <x-select-input id="grade" name="grade" required>
-                                        <option value="1">1</option>
-                                        <option value="2">1.5</option>
-                                        <option value="3">Others</option>
+                                        <option value="1" @if ($order->brick_grade == 1) selected @endif>1</option>
+                                        <option value="2" @if ($order->brick_grade == 2) selected @endif>1.5</option>
+                                        <option value="3" @if ($order->brick_grade == 3) selected @endif>Others</option>
                                     </x-select-input>
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
@@ -120,10 +120,10 @@
                                 <div>
                                     <x-input-label for="chips_grade" :value="__('Chips Grade')" />
                                     <x-select-input id="chips_grade" name="chips_grade" required>
-                                        <option value="1">3/4</option>
-                                        <option value="2">Macadam</option>
-                                        <option value="3">Bats</option>
-                                        <option value="4">Chips</option>
+                                        <option value="1" @if ($order->chips_grade == 1) selected @endif>3/4</option>
+                                        <option value="2" @if ($order->chips_grade == 2) selected @endif>Macadam</option>
+                                        <option value="3" @if ($order->chips_grade == 3) selected @endif>Bats</option>
+                                        <option value="4" @if ($order->chips_grade == 4) selected @endif>Chips</option>
                                     </x-select-input>
                                     <x-input-error :messages="$errors->get('chips_grade')" class="mt-2" />
                                 </div>

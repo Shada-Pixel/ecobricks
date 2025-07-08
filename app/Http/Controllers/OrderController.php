@@ -61,7 +61,7 @@ class OrderController extends Controller
         $order->discount = $request->discount;
         $order->total_bill = $request->total;
         $order->paid_bill = $request->paid;
-        $order->due_bill = $request->due;
+        $order->due_bill = floor($request->due);
         $order->note = $request->note;
         $order->desc = $request->description;
         $order->chalan_number = $request->chalan_number;

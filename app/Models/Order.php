@@ -50,4 +50,20 @@ class Order extends Model
 
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
+
+
+    public function getBalanceAttribute()
+    {
+        // Use the same status filter as in Customer model if needed
+        $lastOrder = $this->customer->orders()
+            ->where('id', '<', $this->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastOrder) {
+            return $this->due_bill + $lastOrder->balance;
+        }
+        return $this->due_bill;
+
+    }
 }

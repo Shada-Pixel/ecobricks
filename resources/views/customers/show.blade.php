@@ -109,7 +109,8 @@
                                 <th class="text-center">C.Rate</th>
                                 <th class="text-center">Bill</th>
                                 <th class="text-center">Paid</th>
-                                <th class="text-center">Due</th>
+                                {{-- <th class="text-center">Due</th> --}}
+                                <th class="text-center">Balance</th>
                                 {{-- <th class="print:hidden">Action</th> --}}
                             </tr>
                         </thead>
@@ -127,7 +128,8 @@
                                 <td class="text-center">{{ $order->chips_up }}</td>
                                 <td class="text-right">{{ $order->total_bill }}</td>
                                 <td class="text-right">{{ $order->paid_bill }}</td>
-                                <td class="text-right">{{ $order->due_bill }}</td>
+                                {{-- <td class="text-right">{{ $order->due_bill }}</td> --}}
+                                <td class="text-right">{{ $order->balance }}</td>
                                 {{-- <td class="print:hidden">
                                     <div class="flex gap-2 text-xl">
                                         <a class="bg-green-400 p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
@@ -155,12 +157,14 @@
                                 <td></td>
                                 <td><p class="mb-0 text-right">Bricks: {{ $customer->bricks() }}</p></td>
                                 <td></td>
+                                <td><p class="mb-0 text-right">Chips: {{ $customer->chips() }}</p></td>
                                 <td></td>
-                                <td></td>
-                                <td><p class="mb-0 text-right">Total Bill: {{ $customer->totalbill() }}</p></td>
-                                <td><p class="mb-0 text-right">Paid Bill: {{ $customer->paidbill() }}</p></td>
-                                <td><p class="mb-0 text-right">Due Bill: {{ $customer->duebill() }}</p></td>
-                                {{-- <td></td> --}}
+                                <td><p class="mb-0 text-right">Bill: {{ $customer->totalbill() }}</p></td>
+                                <td><p class="mb-0 text-right">Paid: {{ $customer->paidbill() }}</p></td>
+                                {{-- <td>
+                                    <p class="mb-0 text-right">Due: {{ $customer->duebill() }}</p>
+                                </td> --}}
+                                <td><p class="mb-0 text-right">Due: {{ $customer->duebill() }}</p></td>
                             </tr>
                         </tfoot>
                     </table>

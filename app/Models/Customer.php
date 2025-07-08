@@ -46,7 +46,7 @@ class Customer extends Model
 
     public function duebill()
     {
-        return $this->orders()->sum('due_bill');
+        return round($this->orders()->sum('due_bill'));
     }
 
     public function bricks()
