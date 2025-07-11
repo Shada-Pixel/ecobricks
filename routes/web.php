@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('notes', NoteController::class);
 
     Route::get('/porder', [OrderController::class, 'porder'])->name('porder');
 });

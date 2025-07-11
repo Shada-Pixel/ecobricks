@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -55,9 +56,49 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(Request $request,Customer $customer)
     {
-        return view('customers.show', ['customer'=>$customer]);
+        if ($request->has('from_date') && $request->has('to_date')) {
+            $from_date = $request->input('from_date');
+            $to_date = $request->input('to_date');
+            $orders = $customer->orders()
+                ->whereBetween('order_date', [$from_date, $to_date])
+                ->orderBy('id', 'DESC')
+                ->get();
+
+            // Get the balance() of last of $orders
+            $last_order = $customer->orders()
+                ->whereBetween('order_date', [$from_date, $to_date])
+                ->latest()
+                ->first();
+            $footer_total_bill = $orders->sum('total_bill');
+            $footer_paid_bill = $orders->sum('paid_bill');
+            $footer_due_bill = floor($last_order ? $last_order->balance : 0);
+            $footer_brick_qty = $orders->sum('brick_qty');
+            $footer_chip_qty = $orders->sum('chips_qty');
+        } else {
+            $from_date = null;
+            $to_date = null;
+            $orders = $customer->orders()->orderBy('id', 'DESC')->get();
+
+            $footer_total_bill = $customer->totalbill();
+            $footer_paid_bill = $customer->paidbill();
+            $footer_due_bill = $customer->duebill();
+            $footer_brick_qty = $customer->bricks();
+            $footer_chip_qty = $customer->chips();
+        }
+
+        return view('customers.show', [
+            'customer'=>$customer,
+            'orders' => $orders,
+            'from_date' => $from_date,
+            'to_date' => $to_date,
+            'footer_total_bill'=>$footer_total_bill,
+            'footer_paid_bill'=>$footer_paid_bill,
+            'footer_due_bill'=>$footer_due_bill,
+            'footer_brick_qty'=>$footer_brick_qty,
+            'footer_chip_qty'=>$footer_chip_qty,
+        ]);
     }
 
     /**

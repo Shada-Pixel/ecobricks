@@ -101,7 +101,7 @@
                                 <td class="text-right">{{$order->chips_up ? $order->chips_up : '' }}</td>
                                 <td class="text-right">{{$order->total_bill }}</td>
                                 <td class="text-right">{{$order->paid_bill }}</td>
-                                <td class="text-right">{{$order->due_bill}}</td>
+                                <td class="text-right">{{floor($order->due_bill)}}</td>
                             </tr>
                             @endforeach
                             <tr>

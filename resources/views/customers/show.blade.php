@@ -3,10 +3,18 @@
     <x-slot name="headerstyle">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.min.css" />
+        <style>
+            /* @media print {
+            tfoot{
+                position: fixed;
+                bottom: 20px;
+                left:0px;
+                width:100% !important;
+            }
+            } */
+        </style>
     </x-slot>
     <x-slot name="header">
-
-
         <div class="">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ $customer->name }}
@@ -63,7 +71,13 @@
                         <div class="text-right">
 
                             <h2 class="text-3xl font-bold">{{ $customer->name }}</h2>
-                            <p>Date: <span id="dateto"></span></p>
+                            <p>Date:
+                                @if ($from_date && $to_date)
+                                <span id="">{{$from_date." To ".$to_date}}</span>
+                                @else
+                                <span id="dateto"></span>
+                                @endif
+                            </p>
                             <ul class=" p-0 m-0">
                                 <li class="mb-2">
                                     <div class="flex justify-end items-center">
@@ -95,6 +109,28 @@
                         </div>
 
                     </div>
+                    {{-- Filter div --}}
+                    <div class="flex justify-center items-center print:hidden">
+                        <div class="bg-gray-300 p-2 mb-4 rounded-md inline-block max-w-lg mx-auto">
+                            <form action="{{route('customers.show', $customer->id)}}" method="get" class="inline-block">
+                                @csrf
+                                <!-- Order date -->
+                                <div class="">
+                                    <x-text-input id="from_date" class="flex-grow" name="from_date" required type="date"/>
+                                    <span>To</span>
+                                    <x-text-input id="to_date" class="flex-grow" name="to_date" required type="date"/>
+                                    <x-primary-button class="" id="">
+                                        {{ __('Filter') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                            <a href="{{route('customers.show', $customer->id)}}">
+                                <button class="inline-flex items-center px-2 sm:px-6 py-2 sm:py-4 bg-blue-800 border-none rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-lgreen focus:bg-lgreen active:bg-lgreen focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    {{ __('Reset') }}
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                     <table class="sp-table mb-0" id="oorderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
@@ -111,11 +147,11 @@
                                 <th class="text-center">Paid</th>
                                 {{-- <th class="text-center">Due</th> --}}
                                 <th class="text-center">Balance</th>
-                                {{-- <th class="print:hidden">Action</th> --}}
+                                <th class="print:hidden">Action</th>
                             </tr>
                         </thead>
                         <tbody class="ligth-body">
-                            @foreach ($customer->orders as $order)
+                            @foreach ($orders as $order)
                             <tr>
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
                                 <td>{{ $order->chalan_number }}</td>
@@ -130,20 +166,10 @@
                                 <td class="text-right">{{ $order->paid_bill }}</td>
                                 {{-- <td class="text-right">{{ $order->due_bill }}</td> --}}
                                 <td class="text-right">{{ $order->balance }}</td>
-                                {{-- <td class="print:hidden">
-                                    <div class="flex gap-2 text-xl">
-                                        <a class="bg-green-400 p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                            href="{{ route('orders.show', $order->id) }}"><i class="ri-eye-line mr-0"></i><span class="icon-[solar--eye-outline]"></span>
-                                        <a class="bg-brick p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                            href="{{ route('orders.edit', $order->id) }}"><i class="ri-pencil-line mr-0"></i>
-                                        </a>
-                                        <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="margin-bottom: 5px">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="bg-red-500 p-2 h-10 rounded-sm flex justify-center items-center text-white" onclick="return confirm('Are you sure you want to delete this record?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="ri-delete-bin-line mr-0"></i></button>
-                                        </form>
-                                    </div>
-                                </td> --}}
+                                <td class="print:hidden">
+                                    <a href="{{route('orders.edit', $order->id)}}">Edit</a>
+                                    {{-- <button type="submit" class="text-red-500 p-2 h-10 rounded-sm flex justify-center items-center " onclick="editform()" data-placement="top" title="" data-original-title="Delete">Edit</button> --}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -155,16 +181,17 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><p class="mb-0 text-right">Bricks: {{ $customer->bricks() }}</p></td>
+                                <td><p class="mb-0 text-right">Bricks: {{ $footer_brick_qty}}</p></td>
                                 <td></td>
-                                <td><p class="mb-0 text-right">Chips: {{ $customer->chips() }}</p></td>
+                                <td><p class="mb-0 text-right">Chips: {{ $footer_chip_qty}}</p></td>
                                 <td></td>
-                                <td><p class="mb-0 text-right">Bill: {{ $customer->totalbill() }}</p></td>
-                                <td><p class="mb-0 text-right">Paid: {{ $customer->paidbill() }}</p></td>
+                                <td><p class="mb-0 text-right">Bill: {{ $footer_total_bill }}</p></td>
+                                <td><p class="mb-0 text-right">Paid: {{ $footer_paid_bill }}</p></td>
                                 {{-- <td>
                                     <p class="mb-0 text-right">Due: {{ $customer->duebill() }}</p>
                                 </td> --}}
-                                <td><p class="mb-0 text-right">Due: {{ $customer->duebill() }}</p></td>
+                                <td><p class="mb-0 text-right">Due: {{ $footer_due_bill }}</p></td>
+                                <td class="print:hidden"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -180,6 +207,7 @@
         <script>
 
             $(document).ready(function () {
+                $('#dateto').html(getToday());
                 new DataTable('#orderTable', {
                     layout: {
                         topStart: {
@@ -191,7 +219,6 @@
 
 
                 $('#printbtn').click(function (e) {
-                    $('#dateto').html(getToday());
                     printNow();
                 });
             });

@@ -61,9 +61,9 @@ class Order extends Model
             ->first();
 
         if ($lastOrder) {
-            return $this->due_bill + $lastOrder->balance;
+            return floor($this->due_bill + $lastOrder->balance);
         }
-        return $this->due_bill;
+        return floor($this->due_bill);
 
     }
 }

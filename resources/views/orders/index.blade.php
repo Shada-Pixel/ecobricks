@@ -18,6 +18,27 @@
         <div class="max-w-7xl print:max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    {{-- Searching Div --}}
+                    <div class="flex justify-center items-center">
+
+                        <div class="bg-gray-300 p-2 mb-4 rounded-md inline-block max-w-lg mx-auto">
+                            <form action="{{route('orders.index')}}" method="get" class="inline-block">
+                                <!-- Order date -->
+                                <div class="">
+                                    <x-text-input id="search" class="flex-grow" name="search" required type="text"/>
+                                    <x-primary-button class="" id="">
+                                        {{ __('Search') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                            <a href="{{route('orders.index')}}">
+                                <button class="inline-flex items-center px-2 sm:px-6 py-2 sm:py-4 bg-blue-800 border-none rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-lgreen focus:bg-lgreen active:bg-lgreen focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    {{ __('Reset') }}
+                                </button>
+                            </a>
+                            {{-- <p class="mt-2 text-xs text-center">Search with Bill or Chalan</p> --}}
+                        </div>
+                    </div>
                     <table class="table mb-0" id="orderTable">
                         <thead class="bg-white text-uppercase">
                             <tr class="ligth ligth-data">
@@ -50,7 +71,7 @@
                                 <td>{{ $order->chips_up }}</td>
                                 <td>{{ $order->total_bill }}</td>
                                 <td>{{ $order->paid_bill }}</td>
-                                <td>{{ $order->due_bill }}</td>
+                                <td>{{ floor($order->due_bill) }}</td>
                                 <td class="print:hidden">
                                     <div class="flex gap-2 text-xl">
                                         <a class="bg-green-400 p-2 h-10 rounded-sm flex justify-center items-center text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
@@ -69,6 +90,12 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-4">
+                        {{-- Pagination --}}
+                        {{-- {{ $orders->links() }} --}}
+                        {{ $orders->withQueryString()->links() }}
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,7 +105,7 @@
         {{-- Sweet alert --}}
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            new DataTable('#orderTable');
+            // new DataTable('#orderTable');
 
             // var datatablelist = $('#userTable').DataTable();
 

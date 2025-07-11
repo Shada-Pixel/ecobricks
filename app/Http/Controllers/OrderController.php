@@ -6,15 +6,28 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('id', 'DESC')->where('status', 2)->get();
+        // search($request->search)->
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $orders = Order::where('order_number', 'like', "%{$search}%")
+                ->orWhere('chalan_number', 'like', "%{$search}%")
+                ->orWhere('total_bill', 'like', "%{$search}%")
+                ->orWhere('paid_bill', 'like', "%{$search}%")
+                ->orderBy('id', 'DESC')
+                ->where('status', 2)
+                ->paginate(10);
+        } else {
+            $orders = Order::orderBy('id', 'DESC')->where('status', 2)->paginate(10);
+        }
         return view('orders.index',['orders'=> $orders]);
     }
 
