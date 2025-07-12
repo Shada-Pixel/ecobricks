@@ -63,7 +63,7 @@ class CustomerController extends Controller
             $to_date = $request->input('to_date');
             $orders = $customer->orders()
                 ->whereBetween('order_date', [$from_date, $to_date])
-                ->orderBy('id', 'DESC')
+                ->orderBy('order_date', 'DESC')
                 ->get();
 
             // Get the balance() of last of $orders
@@ -79,7 +79,7 @@ class CustomerController extends Controller
         } else {
             $from_date = null;
             $to_date = null;
-            $orders = $customer->orders()->orderBy('id', 'DESC')->get();
+            $orders = $customer->orders()->orderBy('order_date', 'DESC')->get();
 
             $footer_total_bill = $customer->totalbill();
             $footer_paid_bill = $customer->paidbill();
