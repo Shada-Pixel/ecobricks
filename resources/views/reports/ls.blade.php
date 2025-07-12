@@ -65,7 +65,7 @@
                         <tbody>
                             @foreach ($orders as $order)
                             <tr class="ligth ligth-data">
-                                <td>{{$order->order_date}}</td>
+                                <td class="text-nowrap">{{$order->order_date}}</td>
                                 <td class="text-left">
                                     @if ($order->customer)
                                     {{$order->customer->name}}
