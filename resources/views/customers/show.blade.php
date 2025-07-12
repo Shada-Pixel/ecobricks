@@ -154,7 +154,7 @@
                         <tbody class="ligth-body">
                             @foreach ($orders as $order)
                             <tr>
-                                <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
+                                <td>{{ date('d-m-y', strtotime($order->order_date)) }}</td>
                                 <td>{{ $order->chalan_number }}</td>
                                 <td>{{ $order->note? $order->note : '' }}</td>
                                 <td class="print:hidden">{{ $order->order_number}}</td>
