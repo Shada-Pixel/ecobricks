@@ -308,9 +308,9 @@
             }
 
             function calculatedue() {
-                var st = $('#total').val();
+                var st = parseFloat($('#total').val()) || 0;
                 var op = parseFloat($('#order_paid').val()) || 0;
-                var due = st - op;
+                var due = Math.round(st - op);
                 $('#order_due').val(due);
             }
 

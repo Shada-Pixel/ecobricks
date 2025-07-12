@@ -30,6 +30,7 @@
                         {{ __('Pending Orders')}} &nbsp;<span class="text-brick">{{' (' . $pendingOrder . ')'}}</span>
                     </x-nav-link>
                     @endif
+                    
                     <x-nav-link :href="route('files.index')" :active="request()->routeIs('files.index')">
                         {{ __('Documents') }}
                     </x-nav-link>
