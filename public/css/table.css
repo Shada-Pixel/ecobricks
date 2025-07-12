@@ -1,11 +1,11 @@
 .sp-table{
     width: 98%;
-    font-size: 16px;
+    font-size: 12px;
     border-collapse: collapse;
     margin: 0 auto;
 }
 .sp-table thead{
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid #212529;
     background-color: #c9d8ee;
 }
@@ -16,7 +16,7 @@
 .sp-table th,
 .sp-table td{
     border: 1px solid #212529;
-    padding: 4px;
+    padding: 2px;
 }
 .sp-table td{
     background-color: transparent;
