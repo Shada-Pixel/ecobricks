@@ -137,6 +137,7 @@
                                 <th>Order Date</th>
                                 <th>Challan</th>
                                 <th>Order Note</th>
+                                <th class="print:hidden">Order Number</th>
                                 <th class="text-center">Type</th>
                                 <th class="text-center">Grade</th>
                                 <th class="text-center">Bricks</th>
@@ -156,6 +157,7 @@
                                 <td>{{ date('d-M-y', strtotime($order->order_date)) }}</td>
                                 <td>{{ $order->chalan_number }}</td>
                                 <td>{{ $order->note? $order->note : '' }}</td>
+                                <td class="print:hidden">{{ $order->order_number}}</td>
                                 <td class="text-center">@if ($order->type == 1) F @else M @endif </td>
                                 <td class="text-center">@if ($order->brick_grade == 1) 1 @else 1.5 @endif </td>
                                 <td class="text-center">{{ $order->brick_qty }}</td>
@@ -176,8 +178,8 @@
                         <tfoot>
                             <tr>
                                 <td></td>
-                                {{-- <td></td> --}}
                                 <td></td>
+                                <td class="print:hidden"></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
