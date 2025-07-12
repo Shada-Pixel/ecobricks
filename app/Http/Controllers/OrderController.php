@@ -77,7 +77,10 @@ class OrderController extends Controller
         $order->due_bill = floor($request->due);
         $order->note = $request->note;
         $order->desc = $request->description;
-        $order->chalan_number = $request->chalan_number;
+        if ($request->chalan_number) {
+            # code...
+            $order->chalan_number = $request->chalan_number;
+        }
 
         if ($request->due <= 0) {
             $order->payment_type = 1;

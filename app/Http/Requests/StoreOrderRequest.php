@@ -22,7 +22,7 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'chalan_number' => 'string|unique:orders,chalan_number',
+            'chalan_number' => 'nullable|unique:orders,chalan_number',
             // Add other rules as needed
         ];
     }
