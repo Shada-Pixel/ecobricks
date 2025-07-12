@@ -42,6 +42,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/files/download/{id}', 'downloadFile')->name('files.download');
         Route::delete('/files/{id}', 'destroy')->name('files.destroy');
     });
+    // Route to floor due_bill for orders with decimal values
+    Route::get('/fix-due-bill', function() {
+        $affected = \App\Models\Order::whereRaw('due_bill != FLOOR(due_bill)')->get();
+        foreach ($affected as $order) {
+            $order->due_bill = floor($order->due_bill);
+            $order->save();
+        }
+        return 'Updated ' . count($affected) . ' orders.';
+    })->name('orders.fixDueBill');
 
 
 
