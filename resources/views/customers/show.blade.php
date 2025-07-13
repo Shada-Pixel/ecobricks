@@ -164,10 +164,9 @@
                                 <td class="text-center">{{ $order->brick_up }}</td>
                                 <td class="text-center">{{ $order->chips_qty }}</td>
                                 <td class="text-center">{{ $order->chips_up }}</td>
-                                <td class="text-right">{{ $order->total_bill }}</td>
-                                <td class="text-right">{{ $order->paid_bill }}</td>
-                                {{-- <td class="text-right">{{ $order->due_bill }}</td> --}}
-                                <td class="text-right">{{ $order->balance }}</td>
+                                <td class="text-right">{{ $order->total_bill }}</td>{{-- Total Bill cell --}}
+                                <td class="text-right">{{ $order->paid_bill }}</td>{{-- Paid bill cell --}}
+                                <td class="text-right"></td>{{-- Balance cell --}}
                                 <td class="print:hidden">
                                     <a href="{{route('orders.edit', $order->id)}}">Edit</a>
                                     {{-- <button type="submit" class="text-red-500 p-2 h-10 rounded-sm flex justify-center items-center " onclick="editform()" data-placement="top" title="" data-original-title="Delete">Edit</button> --}}
@@ -192,7 +191,7 @@
                                 {{-- <td>
                                     <p class="mb-0 text-right">Due: {{ $customer->duebill() }}</p>
                                 </td> --}}
-                                <td><p class="mb-0 text-right">Due: {{ $footer_due_bill }}</p></td>
+                                <td><p class="mb-0 text-right">Balance: </p></td>
                                 <td class="print:hidden"></td>
                             </tr>
                         </tfoot>
@@ -207,7 +206,6 @@
     <x-slot name="pagescript">
         <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
         <script>
-
             $(document).ready(function () {
                 $('#dateto').html(getToday());
                 new DataTable('#orderTable', {
@@ -217,17 +215,38 @@
                         }
                     }
                 });
-
-
-
                 $('#printbtn').click(function (e) {
                     printNow();
                 });
+
+                // Calculate balance for each row in oorderTable
+                // The balance cell will be: (totalbill cell - paid bill cell) + previous row balance cell
+                // Previous row balance cell will only be added if it is not the first row
+                var lastBalance = 0;
+                $('#oorderTable tbody tr').each(function(index) {
+                    // Get total bill and paid bill for this row
+                    var totalBill = parseFloat($(this).find('td').eq(10).text()) || 0;
+                    var paidBill = parseFloat($(this).find('td').eq(11).text()) || 0;
+
+                    // Calculate current row's base balance
+                    var balance = totalBill - paidBill;
+
+                    // If not the first row, add previous row's balance
+                    if (index > 0) {
+                        var prevBalance = parseFloat($('#oorderTable tbody tr').eq(index-1).find('td').eq(12).text()) || 0;
+                        balance += prevBalance;
+                    }
+
+                    // Set the calculated balance in the balance cell (12th index)
+                    $(this).find('td').eq(12).text(balance);
+                    lastBalance = balance;
+                });
+
+                // Set the Balance in the table footer to the last row's balance
+                $('#oorderTable tfoot tr td').eq(12).find('p').text('Balance: ' + lastBalance);
             });
 
-
             function printNow() {
-                // window.print();
                 var printContent = $('.printable').html();
                 var originalContent = $('body').html();
                 $('body').html(printContent);
@@ -235,14 +254,11 @@
                 $('body').html(originalContent);
             }
 
-
             function getToday() {
                 const local = new Date();
                 local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
                 return local.toJSON().slice(0, 10);
             }
-
-
         </script>
 
     </x-slot>

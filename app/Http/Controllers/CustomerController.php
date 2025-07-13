@@ -73,7 +73,6 @@ class CustomerController extends Controller
                 ->first();
             $footer_total_bill = $orders->sum('total_bill');
             $footer_paid_bill = $orders->sum('paid_bill');
-            $footer_due_bill = floor($last_order ? $last_order->balance : 0);
             $footer_brick_qty = $orders->sum('brick_qty');
             $footer_chip_qty = $orders->sum('chips_qty');
         } else {
@@ -83,7 +82,6 @@ class CustomerController extends Controller
 
             $footer_total_bill = $customer->totalbill();
             $footer_paid_bill = $customer->paidbill();
-            $footer_due_bill = $customer->duebill();
             $footer_brick_qty = $customer->bricks();
             $footer_chip_qty = $customer->chips();
         }
@@ -95,7 +93,6 @@ class CustomerController extends Controller
             'to_date' => $to_date,
             'footer_total_bill'=>$footer_total_bill,
             'footer_paid_bill'=>$footer_paid_bill,
-            'footer_due_bill'=>$footer_due_bill,
             'footer_brick_qty'=>$footer_brick_qty,
             'footer_chip_qty'=>$footer_chip_qty,
         ]);
