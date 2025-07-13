@@ -57,7 +57,7 @@ class Order extends Model
         // Use the same status filter as in Customer model if needed
         $lastOrder = $this->customer->orders()
             ->where('id', '<', $this->id)
-            ->orderBy('order_date', 'desc')
+            ->orderBy('order_date', 'asc')
             // ->orderBy('id', 'desc')
             ->first();
 
